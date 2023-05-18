@@ -18,10 +18,9 @@ func main() {
 	if err := database.OpenDb(cfg.ConnectionString); err != nil {
 		log.Fatal(err)
 	}
-
 	handler := netchi.Initialize(cfg.Port)
-	serverErr := http.ListenAndServe(fmt.Sprintf(":%d", handler.Port), handler.Mux)
 
+	serverErr := http.ListenAndServe(fmt.Sprintf(":%d", handler.Port), handler.Mux)
 	if serverErr != nil {
 		log.Fatal(serverErr)
 	}
