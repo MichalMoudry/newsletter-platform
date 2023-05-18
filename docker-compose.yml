@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: newsletter-platform
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8080:8443"
+    environment:
+      APP_ENVIRONMENT: prod
+      CONNECTION_STRING: "postgres://root:root@db:5432/newsletter-platform-db?sslmode=disable"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      db:
+        condition: service_healthy
+  
+  db:
+    image: postgres:15
+    container_name: newsletter-db
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: newsletter-platform-db
+      PGUSER: root
+    ports:
+      - "5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-d", "newsletter-platform-db"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+  
+  migrate:
+    image: migrate/migrate
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./database/migrations:/migrations
+    command:
+      [ "-path", "/migrations", "-database", "postgres://root:root@db:5432/newsletter-platform-db?sslmode=disable", "up"]
+
+volumes:
+  pgdata:
