@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"newsletter-publishing/config"
-	"newsletter-publishing/database"
-	netchi "newsletter-publishing/transport"
+	"newsletter-platform/config"
+	"newsletter-platform/database"
+	netchi "newsletter-platform/transport"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 		log.Fatal(cfgErr)
 	}
 
-	if err := database.OpenDb(""); err != nil { //TODO: replace "" with cfg.ConnectionString
+	if err := database.OpenDb(cfg.ConnectionString); err != nil {
 		log.Fatal(err)
 	}
 

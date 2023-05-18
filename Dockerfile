@@ -10,13 +10,11 @@ FROM build AS run-test-stage
 RUN go test -v ./...
 
 FROM alpine:3.17 AS release
-WORKDIR /newsletter-publishing
+WORKDIR /newsletter-platform
 
 COPY config.json .
 COPY --from=build /build ./build
 
 EXPOSE 8443
 
-#USER nonroot:nonroot
-
-ENTRYPOINT [ "/newsletter-publishing/build" ]
+ENTRYPOINT [ "/newsletter-platform/build" ]
