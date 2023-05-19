@@ -7,4 +7,6 @@ import (
 var (
 	//go:embed scripts/commands/CreateNewsletter.sql
 	CreateNewsletter string
+	//go:embed scripts/commands/CreateUser.sql
+	CreateUser string
 )

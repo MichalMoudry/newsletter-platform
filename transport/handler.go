@@ -2,7 +2,7 @@ package transport
 
 import (
 	"net/http"
-	"newsletter-platform/transport/model/ioc"
+	"newsletter-platform/transport/model"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -10,18 +10,17 @@ import (
 )
 
 type Handler struct {
-	Port             int
-	Mux              *chi.Mux
-	AuthService      ioc.IAuthService
-	UserService      ioc.IUserService
-	PassResetService ioc.IPassResetService
+	Port     int
+	Mux      *chi.Mux
+	Services model.ServiceCollection
 }
 
 // Initializer function for HTTP handler.
-func Initialize(port int) *Handler {
+func Initialize(port int, services model.ServiceCollection) *Handler {
 	handler := &Handler{
-		Port: port,
-		Mux:  chi.NewRouter(),
+		Port:     port,
+		Mux:      chi.NewRouter(),
+		Services: services,
 	}
 	handler.Mux.Use(middleware.Logger)
 
@@ -33,6 +32,7 @@ func Initialize(port int) *Handler {
 
 	// Public routes
 	handler.Mux.Get("/health", health)
+	handler.Mux.Post("/register", handler.RegisterUser)
 
 	return handler
 }

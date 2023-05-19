@@ -2,21 +2,16 @@ package ioc
 
 import (
 	"context"
-
-	"github.com/go-chi/jwtauth/v5"
+	"newsletter-platform/transport/model/dto"
 )
-
-// Service for working with JWT authentication and authorization.
-type IAuthService interface {
-	GetJwtAuth() *jwtauth.JWTAuth
-}
 
 // Service for working with users.
 type IUserService interface {
-	CreateUser(ctx context.Context) error
-	GetUser(ctx context.Context)
+	// Method for creating a new user in the system.
+	CreateUser(ctx context.Context, data dto.NewUserData) error
+	/*GetUser(ctx context.Context)
 	DeleteUser(ctx context.Context)
-	ValidateLogin(ctx context.Context)
+	ValidateLogin(ctx context.Context)*/
 }
 
 // Service for working with password reset tokens.

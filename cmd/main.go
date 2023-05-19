@@ -7,6 +7,7 @@ import (
 	"newsletter-platform/config"
 	"newsletter-platform/database"
 	netchi "newsletter-platform/transport"
+	"newsletter-platform/transport/model"
 )
 
 func main() {
@@ -18,7 +19,8 @@ func main() {
 	if err := database.OpenDb(cfg.ConnectionString); err != nil {
 		log.Fatal(err)
 	}
-	handler := netchi.Initialize(cfg.Port)
+
+	handler := netchi.Initialize(cfg.Port, model.NewServiceCollection())
 
 	serverErr := http.ListenAndServe(fmt.Sprintf(":%d", handler.Port), handler.Mux)
 	if serverErr != nil {

@@ -83,3 +83,47 @@ func UpdatePost(Post_ID uuid.UUID, Post_Name string, Post_Content string, Post_A
 		concurrency_stamp:      uuid.New(),
 	}
 }
+
+type Role string
+
+type User struct {
+	Id               uuid.UUID `db:"id"`
+	Email            string    `db:"email"`
+	UserName         string    `db:"user_name"`
+	UserRole         Role      `db:"user_role"`
+	PasswordHash     string    `db:"password_hash"`
+	DateAdded        time.Time `db:"date_added"`
+	DateUpdated      time.Time `db:"date_updated"`
+	ConcurrencyStamp uuid.UUID `db:"concurrency_stamp"`
+}
+
+func NewUser(email, userName, password string) *User {
+	now := time.Now()
+	return &User{
+		Id:               uuid.New(),
+		Email:            email,
+		UserName:         userName,
+		UserRole:         "Editor",
+		PasswordHash:     password,
+		DateAdded:        now,
+		DateUpdated:      now,
+		ConcurrencyStamp: uuid.New(),
+	}
+}
+
+type PasswordResetToken struct {
+	Id             uuid.UUID `db:"id"`
+	ExpirationDate time.Time `db:"expiration_date"`
+	DateAdded      time.Time `db:"date_added"`
+	Email          string    `db:"email"`
+}
+
+func NewPasswordResetToken(email string) *PasswordResetToken {
+	now := time.Now()
+	return &PasswordResetToken{
+		Id:             uuid.New(),
+		ExpirationDate: now.Add(time.Hour * 72),
+		DateAdded:      now,
+		Email:          email,
+	}
+}
