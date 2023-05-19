@@ -9,7 +9,11 @@ import (
 
 // This function starts a database transaction.
 func BeginTransaction(ctx context.Context) (*sqlx.Tx, error) {
-	return dbContext.BeginTxx(ctx, nil)
+	dbCtx, err := GetDbContext()
+	if err != nil {
+		return nil, err
+	}
+	return dbCtx.BeginTxx(ctx, nil)
 }
 
 // This function ends a specific database transaction.
