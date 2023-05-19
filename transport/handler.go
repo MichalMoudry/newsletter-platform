@@ -16,7 +16,7 @@ type Handler struct {
 }
 
 // Initializer function for HTTP handler.
-func Initialize(port int, services model.ServiceCollection) *Handler {
+func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceCollection) *Handler {
 	handler := &Handler{
 		Port:     port,
 		Mux:      chi.NewRouter(),
@@ -26,7 +26,7 @@ func Initialize(port int, services model.ServiceCollection) *Handler {
 
 	// Protected routes
 	handler.Mux.Group(func(r chi.Router) {
-		//r.Use(jwtauth.Verifier(handler.AuthService.GetJwtAuth()))
+		r.Use(jwtauth.Verifier(tokenAuth))
 		r.Use(jwtauth.Authenticator)
 	})
 

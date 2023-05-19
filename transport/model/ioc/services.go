@@ -9,8 +9,8 @@ import (
 type IUserService interface {
 	// Method for creating a new user in the system.
 	CreateUser(ctx context.Context, data dto.NewUserData) error
-	/*GetUser(ctx context.Context)
-	DeleteUser(ctx context.Context)
+	GetUser(ctx context.Context)
+	/*DeleteUser(ctx context.Context)
 	ValidateLogin(ctx context.Context)*/
 }
 
