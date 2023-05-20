@@ -14,6 +14,7 @@ type Config struct {
 	Port int
 	Environment
 	ConnectionString string
+	SecurityString   string
 }
 
 const (
@@ -41,9 +42,17 @@ func ReadConfigFromFile(path string) (Config, error) {
 		return Config{}, errors.ErrMissingConnectionString
 	}
 
+	securityString := os.Getenv("SECURITY_STRING")
+	if securityString == "" && env == Dev {
+		securityString = viper.GetString("SecurityString")
+	} else if securityString == "" {
+		return Config{}, errors.ErrMissingSecurityString
+	}
+
 	return Config{
 		Port:             viper.GetInt("Port"),
 		Environment:      env,
 		ConnectionString: connectionString,
+		SecurityString:   securityString,
 	}, nil
 }

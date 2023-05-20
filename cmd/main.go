@@ -8,6 +8,8 @@ import (
 	"newsletter-platform/database"
 	netchi "newsletter-platform/transport"
 	"newsletter-platform/transport/model"
+
+	"github.com/go-chi/jwtauth/v5"
 )
 
 func main() {
@@ -20,7 +22,12 @@ func main() {
 		log.Fatal(err)
 	}
 
-	handler := netchi.Initialize(cfg.Port, model.NewServiceCollection())
+	tokenAuth := jwtauth.New("HS512", []byte(cfg.SecurityString), nil)
+	handler := netchi.Initialize(
+		cfg.Port,
+		tokenAuth,
+		model.NewServiceCollection(tokenAuth),
+	)
 
 	serverErr := http.ListenAndServe(fmt.Sprintf(":%d", handler.Port), handler.Mux)
 	if serverErr != nil {

@@ -62,11 +62,20 @@ func Test_ComparePasswordHash(t *testing.T) {
 			wantMatch: false,
 			wantErr:   true,
 		},
+		{
+			name: "Test empty hash",
+			args: args{
+				password: "Password1",
+				hash:     "",
+			},
+			wantMatch: false,
+			wantErr:   true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			gotMatch, err := ComparePasswordHash(tt.args.password, tt.args.hash)
-			assert.Equal(t, err != nil, tt.wantErr)
+			assert.Equal(t, tt.wantErr, err != nil)
 			assert.Equal(t, gotMatch, tt.wantMatch)
 		})
 	}

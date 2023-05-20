@@ -2,6 +2,7 @@
     "Port": 8443,
     "Environment": "dev",
     "ConnectionString": "postgres://root:root@localhost:5432/data-persistence?sslmode=disable",
+    "SecurityString": "132456789-/ef-/eqw-f",
     "HttpsConfig": {
         "CertFilePath": "",
         "KeyFilePath": ""

@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/go-chi/jwtauth/v5"
+	"github.com/google/uuid"
 )
 
 // Function for obtaining a map of claims from a JWT token.
@@ -17,11 +18,12 @@ func GetClaimsFromContext(ctx context.Context) (map[string]interface{}, error) {
 }
 
 // Function for obtaining content of the issued JWTs.
-func GetJwtTokenContent(subject string) map[string]interface{} {
+func GetJwtTokenContent(subject string, id uuid.UUID) map[string]interface{} {
 	return map[string]interface{}{
-		"sub": subject,
-		"iss": "https://localhost:443",
-		"aud": []string{"https://localhost:443", "https://localhost:443"},
-		"exp": time.Now().UTC().AddDate(0, 0, 1),
+		"sub":     subject,
+		"iss":     "https://localhost:443",
+		"aud":     []string{"https://localhost:443", "https://localhost:443"},
+		"exp":     time.Now().UTC().AddDate(0, 0, 1),
+		"user_id": id,
 	}
 }
