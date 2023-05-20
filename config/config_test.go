@@ -29,6 +29,7 @@ func Test_ReadConfigFromFile(t *testing.T) {
 				Port:             8443,
 				ConnectionString: "postgres://root:root@localhost:5432/data-persistence?sslmode=disable",
 				Environment:      Dev,
+				SecurityString:   "132456789-/ef-/eqw-f",
 			},
 			wantErr: false,
 		},
@@ -43,46 +44,11 @@ func Test_ReadConfigFromFile(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			got, err := ReadConfigFromFile(tt.args.path)
-			//assert.NotEqual(t, err != nil, tt.wantErr)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("ReadConfigFromFile() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
 			assert.Equal(t, tt.want, got)
-		})
-	}
-}
-
-func Test_EnvironmentConfig(t *testing.T) {
-	type args struct {
-		configPath string
-		Env        Environment
-	}
-
-	tests := []struct {
-		name string
-		args args
-		want Config
-	}{
-		{
-			name: "Test config in local dev environment",
-			args: args{
-				configPath: configPath,
-				Env:        Dev,
-			},
-			want: Config{
-				Port:             8443,
-				ConnectionString: "postgres://root:root@localhost:5432/data-persistence?sslmode=disable",
-				Environment:      Dev,
-			},
-		},
-	}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			got, err := ReadConfigFromFile(test.args.configPath)
-			assert.Nil(t, err)
-			assert.Equal(t, test.want, got)
 		})
 	}
 }
