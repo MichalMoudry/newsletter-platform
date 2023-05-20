@@ -70,3 +70,25 @@ func (handler *Handler) GetUserData(writer http.ResponseWriter, request *http.Re
 
 	util.WriteResponse(writer, http.StatusOK, data)
 }
+
+func (handler *Handler) DeleteUser(writer http.ResponseWriter, request *http.Request) {
+	var requestData contracts.DeleteUserRequestData
+	err := util.UnmarshallRequest(request, &requestData)
+	if err != nil {
+		util.WriteErrResponse(writer, http.StatusBadRequest, err)
+		return
+	}
+
+	email, err := getEmailFromURL(request)
+	if err != nil {
+		util.WriteErrResponse(writer, http.StatusBadRequest, err)
+		return
+	}
+	err = handler.Services.UserService.DeleteUser(request.Context(), email, requestData.ConcurrencyStamp)
+	if err != nil {
+		util.WriteErrResponse(writer, http.StatusInternalServerError, err)
+		return
+	}
+
+	util.WriteResponse(writer, http.StatusOK, nil)
+}

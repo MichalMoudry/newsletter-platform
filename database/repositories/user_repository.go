@@ -4,6 +4,8 @@ import (
 	"newsletter-platform/database"
 	"newsletter-platform/database/model"
 	"newsletter-platform/database/query"
+
+	"github.com/google/uuid"
 )
 
 type UserRepository struct{}
@@ -49,7 +51,16 @@ func (UserRepository) GetDataForLogin(email string) (model.LoginData, error) {
 	return data, nil
 }
 
-func (UserRepository) DeleteUser() error {
+// Method for deleting a specific user in the database.
+func (UserRepository) DeleteUser(email string, concurrencyStamp uuid.UUID) error {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return err
+	}
+
+	if _, err = ctx.Exec(query.DeleteUser, email, concurrencyStamp); err != nil {
+		return err
+	}
 	return nil
 }
 

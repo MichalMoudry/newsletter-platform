@@ -1,6 +1,10 @@
 package ioc
 
-import "newsletter-platform/database/model"
+import (
+	"newsletter-platform/database/model"
+
+	"github.com/google/uuid"
+)
 
 type IUserRepository interface {
 	// Method for storing a new user in a database.
@@ -9,4 +13,6 @@ type IUserRepository interface {
 	GetUser(email string) (model.UserInfo, error)
 	// Method for obtaining data that is relevant to login process.
 	GetDataForLogin(email string) (model.LoginData, error)
+	// Method for deleting a specific user in the database.
+	DeleteUser(email string, concurrencyStamp uuid.UUID) error
 }

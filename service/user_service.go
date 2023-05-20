@@ -27,7 +27,7 @@ func NewUserService(storage ioc.IUserRepository, auth *jwtauth.JWTAuth) UserServ
 }
 
 // Method for creating a new user in the system.
-func (srvc UserService) CreateUser(ctx context.Context, data dto.NewUserData) error {
+func (srvc UserService) CreateUser(ctx context.Context, data dto.NewUserData) (err error) {
 	tx, err := database.BeginTransaction(ctx)
 	if err != nil {
 		return err
@@ -49,12 +49,9 @@ func (srvc UserService) CreateUser(ctx context.Context, data dto.NewUserData) er
 
 // Method for obtaining a specific user in the system.
 func (srvc UserService) GetUser(ctx context.Context, email string) (model.UserInfo, error) {
-	jwtClaims, err := util.GetClaimsFromContext(ctx)
+	err := validateEmailWithContext(ctx, email)
 	if err != nil {
-		return model.UserInfo{}, errors.ErrJwtParsing
-	}
-	if jwtClaims["sub"] != email {
-		return model.UserInfo{}, errors.ErrInvalidEmail
+		return model.UserInfo{}, err
 	}
 
 	data, err := srvc.UserRepo.GetUser(email)
@@ -85,4 +82,42 @@ func (srvc UserService) ValidateLogin(_ context.Context, email, password string)
 	}
 
 	return token, nil
+}
+
+// Method for handling of removal of a specific user in the system.
+func (srvc UserService) DeleteUser(ctx context.Context, email, concurrencyStamp string) (err error) {
+	tx, err := database.BeginTransaction(ctx)
+	if err != nil {
+		return err
+	}
+	defer func() { database.EndTransaction(tx, err) }()
+
+	err = validateEmailWithContext(ctx, email)
+	if err != nil {
+		return err
+	}
+
+	stamp, err := uuid.Parse(concurrencyStamp)
+	if err != nil {
+		return err
+	}
+
+	err = srvc.UserRepo.DeleteUser(email, stamp)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Function for validating if email in the context equals a specific email.
+func validateEmailWithContext(ctx context.Context, email string) error {
+	jwtClaims, err := util.GetClaimsFromContext(ctx)
+	if err != nil {
+		return errors.ErrJwtParsing
+	}
+	if jwtClaims["sub"] != email {
+		return errors.ErrInvalidEmail
+	}
+	return nil
 }

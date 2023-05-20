@@ -9,6 +9,8 @@ var (
 	CreateNewsletter string
 	//go:embed scripts/commands/CreateUser.sql
 	CreateUser string
+	//go:embed scripts/commands/DeleteUser.sql
+	DeleteUser string
 
 	//go:embed scripts/queries/GetUser.sql
 	GetUser string

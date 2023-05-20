@@ -32,6 +32,7 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 		r.Route("/users", func(r chi.Router) {
 			r.Route("/{email}", func(r chi.Router) {
 				r.Get("/", handler.GetUserData)
+				r.Delete("/", handler.DeleteUser)
 			})
 		})
 	})

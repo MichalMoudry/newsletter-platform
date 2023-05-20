@@ -14,8 +14,8 @@ type IUserService interface {
 	GetUser(ctx context.Context, email string) (model.UserInfo, error)
 	// Method for validating if user provided correct credentials.
 	ValidateLogin(ctx context.Context, email, password string) (string, error)
-	/*DeleteUser(ctx context.Context)
-	ValidateLogin(ctx context.Context)*/
+	// Method for handling of removal of a specific user in the system.
+	DeleteUser(ctx context.Context, email, concurrencyStamp string) error
 }
 
 // Service for working with password reset tokens.
