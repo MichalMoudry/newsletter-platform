@@ -71,6 +71,7 @@ func (handler *Handler) GetUserData(writer http.ResponseWriter, request *http.Re
 	util.WriteResponse(writer, http.StatusOK, data)
 }
 
+// Method for handling user's requests to delete their accounts.
 func (handler *Handler) DeleteUser(writer http.ResponseWriter, request *http.Request) {
 	var requestData contracts.DeleteUserRequestData
 	err := util.UnmarshallRequest(request, &requestData)

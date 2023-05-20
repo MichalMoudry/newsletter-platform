@@ -2,7 +2,6 @@
 A repository for a web API for the newsletter platform.
 
 [![Build and test project](https://github.com/MichalMoudry/newsletter-platform/actions/workflows/go.yml/badge.svg)](https://github.com/MichalMoudry/newsletter-platform/actions/workflows/go.yml)
-[![Publish Docker image](https://github.com/MichalMoudry/newsletter-platform/actions/workflows/docker_publish.yml/badge.svg)](https://github.com/MichalMoudry/newsletter-platform/actions/workflows/docker_publish.yml)
 
 # Application description
 The newsletter app enables newsletter editors to register and manage their own newsletter that consumers can subscribe to. Editors can then publish news in the newsletter and send them to all subscribers.
