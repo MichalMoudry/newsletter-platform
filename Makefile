@@ -24,3 +24,5 @@ migrate_local_db:
 	migrate -path "./database/migrations" -database "postgres://root:root@localhost:5432/data-persistence?sslmode=disable" up
 
 # TODO: Add docker comands
+compose:
+	docker compose up

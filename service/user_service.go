@@ -66,7 +66,7 @@ func (srvc UserService) GetUser(ctx context.Context, email string) (model.UserIn
 func (srvc UserService) ValidateLogin(_ context.Context, email, password string) (string, error) {
 	data, err := srvc.UserRepo.GetDataForLogin(email)
 	if err != nil {
-		return "", nil
+		return "", err
 	}
 
 	match, err := util.ComparePasswordHash(password, data.PasswordHash)
