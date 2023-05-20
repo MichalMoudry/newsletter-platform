@@ -11,6 +11,7 @@ var (
 	CreateUser string
 
 	//go:embed scripts/queries/GetUser.sql
-	GetUser         string
+	GetUser string
+	//go:embed scripts/queries/GetDataForLogin.sql
 	GetDataForLogin string
 )
