@@ -9,3 +9,7 @@ type UserInfo struct {
 	UserRole         string    `db:"user_role"`
 	ConcurrencyStamp uuid.UUID `db:"concurrency_stamp"`
 }
+
+type LoginData struct {
+	PasswordHash string `db:"password_hash"`
+}

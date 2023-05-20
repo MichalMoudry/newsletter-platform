@@ -35,6 +35,20 @@ func (UserRepository) GetUser(email string) (model.UserInfo, error) {
 	return userInfo, nil
 }
 
+// Method for obtaining data that is relevant to login process.
+func (UserRepository) GetDataForLogin(email string) (model.LoginData, error) {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return model.LoginData{}, err
+	}
+
+	var data model.LoginData
+	if err = ctx.Get(&data, query.GetDataForLogin, email); err != nil {
+		return model.LoginData{}, err
+	}
+	return data, nil
+}
+
 func (UserRepository) DeleteUser() error {
 	return nil
 }

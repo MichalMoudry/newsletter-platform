@@ -2,6 +2,7 @@ package ioc
 
 import (
 	"context"
+	"newsletter-platform/database/model"
 	"newsletter-platform/transport/model/dto"
 )
 
@@ -9,7 +10,10 @@ import (
 type IUserService interface {
 	// Method for creating a new user in the system.
 	CreateUser(ctx context.Context, data dto.NewUserData) error
-	GetUser(ctx context.Context)
+	// Method for obtaining a specific user in the system.
+	GetUser(ctx context.Context, email string) (model.UserInfo, error)
+	// Method for validating if user provided correct credentials.
+	ValidateLogin(ctx context.Context, email, password string) (string, error)
 	/*DeleteUser(ctx context.Context)
 	ValidateLogin(ctx context.Context)*/
 }

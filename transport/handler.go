@@ -28,11 +28,18 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 	handler.Mux.Group(func(r chi.Router) {
 		r.Use(jwtauth.Verifier(tokenAuth))
 		r.Use(jwtauth.Authenticator)
+
+		r.Route("/users", func(r chi.Router) {
+			r.Route("/{email}", func(r chi.Router) {
+				r.Get("/", handler.GetUserData)
+			})
+		})
 	})
 
 	// Public routes
 	handler.Mux.Get("/health", health)
 	handler.Mux.Post("/register", handler.RegisterUser)
+	handler.Mux.Post("/login", handler.Login)
 
 	return handler
 }

@@ -28,10 +28,11 @@ func main() {
 		securityString = "132456789-/ef-/eqw-f"
 	}
 
+	tokenAuth := jwtauth.New("HS512", []byte(securityString), nil)
 	handler := netchi.Initialize(
 		cfg.Port,
-		jwtauth.New("HS512", []byte(securityString), nil),
-		model.NewServiceCollection(),
+		tokenAuth,
+		model.NewServiceCollection(tokenAuth),
 	)
 
 	serverErr := http.ListenAndServe(fmt.Sprintf(":%d", handler.Port), handler.Mux)
