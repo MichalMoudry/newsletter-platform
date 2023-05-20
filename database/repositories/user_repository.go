@@ -64,6 +64,15 @@ func (UserRepository) DeleteUser(email string, concurrencyStamp uuid.UUID) error
 	return nil
 }
 
-func (UserRepository) UpdateUser() error {
+// Method for updating user's general information in the database.
+func (UserRepository) UpdateUser(data model.UserUpdateData) error {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return err
+	}
+
+	if _, err = ctx.NamedExec(query.UpdateUser, data); err != nil {
+		return err
+	}
 	return nil
 }

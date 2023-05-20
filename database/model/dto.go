@@ -10,6 +10,16 @@ type UserInfo struct {
 	ConcurrencyStamp uuid.UUID `db:"concurrency_stamp"`
 }
 
+// Structure encapsulating data used in login process.
 type LoginData struct {
-	PasswordHash string `db:"password_hash"`
+	UserId       uuid.UUID `db:"id"`
+	PasswordHash string    `db:"password_hash"`
+}
+
+type UserUpdateData struct {
+	UserId              uuid.UUID `db:"user_id"`
+	Email               string    `db:"email"`
+	UserName            string    `db:"user_name"`
+	OldConcurrencyStamp uuid.UUID `db:"old_concurrency_stamp"`
+	NewConcurrencyStamp uuid.UUID `db:"new_concurrency_stamp"`
 }

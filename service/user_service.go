@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"newsletter-platform/database"
 	"newsletter-platform/database/model"
 	"newsletter-platform/service/errors"
@@ -76,7 +77,7 @@ func (srvc UserService) ValidateLogin(_ context.Context, email, password string)
 		return "", errors.ErrInvalidLogin
 	}
 
-	_, token, err := srvc.tokenAuth.Encode(util.GetJwtTokenContent(email))
+	_, token, err := srvc.tokenAuth.Encode(util.GetJwtTokenContent(email, data.UserId))
 	if err != nil {
 		return "", err
 	}
@@ -103,6 +104,46 @@ func (srvc UserService) DeleteUser(ctx context.Context, email, concurrencyStamp 
 	}
 
 	err = srvc.UserRepo.DeleteUser(email, stamp)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// Method for updating user's general information in the system.
+func (srvc UserService) UpdateUsersInfo(ctx context.Context, email, username, concurrencyStamp string) (err error) {
+	tx, err := database.BeginTransaction(ctx)
+	if err != nil {
+		return err
+	}
+	defer func() { database.EndTransaction(tx, err) }()
+
+	err = validateEmailWithContext(ctx, email)
+	if err != nil {
+		return err
+	}
+
+	claims, err := util.GetClaimsFromContext(ctx)
+	if err != nil {
+		return err
+	}
+	userId, err := uuid.Parse(fmt.Sprint(claims["user_id"]))
+	if err != nil {
+		return err
+	}
+	oldConcurrencyStamp, err := uuid.Parse(concurrencyStamp)
+	if err != nil {
+		return err
+	}
+
+	err = srvc.UserRepo.UpdateUser(model.UserUpdateData{
+		UserId:              userId,
+		Email:               email,
+		UserName:            username,
+		OldConcurrencyStamp: oldConcurrencyStamp,
+		NewConcurrencyStamp: uuid.New(),
+	})
 	if err != nil {
 		return err
 	}

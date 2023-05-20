@@ -93,3 +93,29 @@ func (handler *Handler) DeleteUser(writer http.ResponseWriter, request *http.Req
 
 	util.WriteResponse(writer, http.StatusOK, nil)
 }
+
+// Method for handling request for updataing user's general information.
+func (handler *Handler) UpdateUserInfo(writer http.ResponseWriter, request *http.Request) {
+	email, err := getEmailFromURL(request)
+	if err != nil {
+		util.WriteErrResponse(writer, http.StatusBadRequest, err)
+		return
+	}
+
+	var requestData contracts.UpdateUserRequestData
+	if err = util.UnmarshallRequest(request, &requestData); err != nil {
+		util.WriteErrResponse(writer, http.StatusBadRequest, err)
+		return
+	}
+
+	err = handler.Services.UserService.UpdateUsersInfo(
+		request.Context(), email,
+		requestData.UserName,
+		requestData.ConcurrencyStamp,
+	)
+	if err != nil {
+		util.WriteErrResponse(writer, http.StatusInternalServerError, err)
+		return
+	}
+	util.WriteResponse(writer, http.StatusOK, nil)
+}
