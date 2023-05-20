@@ -22,11 +22,13 @@ func (handler *Handler) RegisterUser(writer http.ResponseWriter, request *http.R
 	err := util.UnmarshallRequest(request, &registerRequest)
 	if err != nil {
 		util.WriteErrResponse(writer, http.StatusBadRequest, err)
+		return
 	}
 
 	err = handler.Services.UserService.CreateUser(request.Context(), dto.ToNewUserData(registerRequest))
 	if err != nil {
 		util.WriteErrResponse(writer, http.StatusInternalServerError, err)
+		return
 	}
 
 	util.WriteResponse(writer, http.StatusCreated, registerRequest)
@@ -109,7 +111,8 @@ func (handler *Handler) UpdateUserInfo(writer http.ResponseWriter, request *http
 	}
 
 	err = handler.Services.UserService.UpdateUsersInfo(
-		request.Context(), email,
+		request.Context(),
+		email,
 		requestData.UserName,
 		requestData.ConcurrencyStamp,
 	)
