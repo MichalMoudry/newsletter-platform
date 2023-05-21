@@ -14,6 +14,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// Service that provides functionality for dealing with users.
 type UserService struct {
 	UserRepo  ioc.IUserRepository
 	tokenAuth *jwtauth.JWTAuth
