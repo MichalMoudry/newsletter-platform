@@ -23,7 +23,7 @@ func GetJwtTokenContent(subject string, id uuid.UUID) map[string]interface{} {
 		"sub":     subject,
 		"iss":     "https://localhost:443",
 		"aud":     []string{"https://localhost:443", "https://localhost:443"},
-		"exp":     time.Now().UTC().AddDate(0, 0, 1),
+		"exp":     time.Now().UTC().AddDate(0, 0, 3),
 		"user_id": id,
 	}
 }

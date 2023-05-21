@@ -76,3 +76,16 @@ func (UserRepository) UpdateUser(data model.UserUpdateData) error {
 	}
 	return nil
 }
+
+// Method for updating user's password.
+func (UserRepository) UpdatePassword(email, passwordHash string) error {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return err
+	}
+	if _, err = ctx.Exec(query.ResetPassword, passwordHash, email); err != nil {
+		return err
+	}
+
+	return nil
+}

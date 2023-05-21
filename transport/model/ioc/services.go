@@ -26,5 +26,9 @@ type IUserService interface {
 
 // Service for working with password reset tokens.
 type IPassResetService interface {
-	CreateToken(ctx context.Context)
+	// Method for generating a new password reset token.
+	GenerateNewToken(ctx context.Context, email string) error
+
+	// Method for resetting user's password.
+	ResetPassword(ctx context.Context, email, password, tokenId string) error
 }

@@ -9,7 +9,7 @@ type NewUserData struct {
 }
 
 // Function for transforming registration request to a DTO.
-func ToNewUserData(r contracts.RegisterUserRequest) NewUserData {
+func ToNewUserData(r contracts.RegisterUserRequestData) NewUserData {
 	return NewUserData{
 		Email:    r.Email,
 		UserName: r.UserName,

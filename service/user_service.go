@@ -14,6 +14,7 @@ import (
 	"github.com/google/uuid"
 )
 
+// Service that provides functionality for dealing with users.
 type UserService struct {
 	UserRepo  ioc.IUserRepository
 	tokenAuth *jwtauth.JWTAuth
@@ -81,7 +82,6 @@ func (srvc UserService) ValidateLogin(_ context.Context, email, password string)
 	if err != nil {
 		return "", err
 	}
-
 	return token, nil
 }
 
@@ -107,7 +107,6 @@ func (srvc UserService) DeleteUser(ctx context.Context, email, concurrencyStamp 
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -147,7 +146,6 @@ func (srvc UserService) UpdateUsersInfo(ctx context.Context, email, username, co
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
