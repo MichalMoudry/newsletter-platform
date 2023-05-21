@@ -31,7 +31,7 @@ func (srvc EmailService) Send(to, subject, content, htmlContent string) error {
 	}
 	identity := os.Getenv("EMAIL_SENDER_IDENTITY")
 	if identity == "" {
-		return errors.ErrEmailClientNotInitialized
+		return errors.ErrSenderIdentityNotSet
 	}
 
 	from := mail.NewEmail("Newsletter platform", identity)
