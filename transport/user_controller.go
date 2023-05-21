@@ -122,3 +122,8 @@ func (handler *Handler) UpdateUserInfo(writer http.ResponseWriter, request *http
 	}
 	util.WriteResponse(writer, http.StatusOK, nil)
 }
+
+// Method for handling requests for generating password reset requests.
+func (handler *Handler) GeneratePassResetToken(writer http.ResponseWriter, request *http.Request) {
+
+}

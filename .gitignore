@@ -22,3 +22,6 @@ go.work
 
 # IDE & text editors
 .vscode
+
+# MacOS
+.DS_Store

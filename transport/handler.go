@@ -42,6 +42,9 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 	handler.Mux.Get("/health", health)
 	handler.Mux.Post("/register", handler.RegisterUser)
 	handler.Mux.Post("/login", handler.Login)
+	handler.Mux.Route("/passwordresetrequests", func(r chi.Router) {
+		r.Post("/", handler.GeneratePassResetToken)
+	})
 
 	return handler
 }
