@@ -31,7 +31,7 @@ type IPassResetRepository interface {
 	AddToken(token *model.PasswordResetToken) error
 
 	// Method for obtaining last/newest user's token.
-	GetUsersLastToken(tokenId uuid.UUID) (model.PassResetTokenData, error)
+	GetPassResetToken(tokenId uuid.UUID) (model.PassResetTokenData, error)
 
 	// Method for deleting one or more password reset tokens in the database.
 	DeleteTokens(tokens []model.PassResetTokenData) error

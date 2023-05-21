@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	cfg, cfgErr := config.ReadConfigFromFile("config.json")
+	cfg, cfgErr := config.ReadConfigFromFile("../config.json")
 	if cfgErr != nil {
 		log.Fatal(cfgErr)
 	}

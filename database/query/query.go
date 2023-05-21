@@ -24,6 +24,6 @@ var (
 	GetUser string
 	//go:embed scripts/queries/GetDataForLogin.sql
 	GetDataForLogin string
-	//go:embed scripts/queries/GetLastPassResetToken.sql
-	GetLastPassResetToken string
+	//go:embed scripts/queries/GetPassResetToken.sql
+	GetPassResetToken string
 )

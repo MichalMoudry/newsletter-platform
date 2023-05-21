@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"newsletter-platform/database"
 	"newsletter-platform/database/model"
 	"newsletter-platform/service/errors"
@@ -38,6 +39,7 @@ func (srvc PassResetService) GenerateNewToken(ctx context.Context, email string)
 	if err != nil {
 		return err
 	}
+	token := model.NewPasswordResetToken(email)
 	defer func() {
 		database.EndTransaction(tx, err)
 		if err == nil {
@@ -45,12 +47,12 @@ func (srvc PassResetService) GenerateNewToken(ctx context.Context, email string)
 				email,
 				email_model.PassResetEmailSubject,
 				email_model.PassResetEmailContent,
-				email_model.PassResetEmailHtmlContent,
+				fmt.Sprintf(email_model.PassResetEmailHtmlContent, token.Id),
 			)
 		}
 	}()
 
-	if err = srvc.PassResetRepo.AddToken(model.NewPasswordResetToken(email)); err != nil {
+	if err = srvc.PassResetRepo.AddToken(token); err != nil {
 		return err
 	}
 	return nil
@@ -62,10 +64,6 @@ func (srvc PassResetService) ResetPassword(ctx context.Context, email, password,
 	if err != nil {
 		return err
 	}
-	err = validateEmailWithContext(ctx, email)
-	if err != nil {
-		return err
-	}
 	parsedToken, err := uuid.Parse(tokenId)
 	if err != nil {
 		return err
@@ -73,7 +71,7 @@ func (srvc PassResetService) ResetPassword(ctx context.Context, email, password,
 	defer func() { database.EndTransaction(tx, err) }()
 
 	// Verify token
-	token, err := srvc.PassResetRepo.GetUsersLastToken(parsedToken)
+	token, err := srvc.PassResetRepo.GetPassResetToken(parsedToken)
 	if err != nil {
 		return err
 	}

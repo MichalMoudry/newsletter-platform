@@ -24,14 +24,14 @@ func (PassResetRepository) AddToken(token *model.PasswordResetToken) error {
 }
 
 // Method for obtaining last/newest user's token.
-func (PassResetRepository) GetUsersLastToken(tokenId uuid.UUID) (model.PassResetTokenData, error) {
+func (PassResetRepository) GetPassResetToken(tokenId uuid.UUID) (model.PassResetTokenData, error) {
 	ctx, err := database.GetDbContext()
 	if err != nil {
 		return model.PassResetTokenData{}, err
 	}
 
 	var token model.PassResetTokenData
-	if err = ctx.Get(&token, query.GetLastPassResetToken, tokenId); err != nil {
+	if err = ctx.Get(&token, query.GetPassResetToken, tokenId); err != nil {
 		return model.PassResetTokenData{}, err
 	}
 

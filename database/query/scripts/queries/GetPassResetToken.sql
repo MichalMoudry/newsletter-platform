@@ -6,7 +6,3 @@ FROM
     password_reset_tokens as t
 WHERE
     t.id = $1
-ORDER BY
-    t.expiration_date DESC
-LIMIT
-    1

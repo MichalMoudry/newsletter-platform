@@ -94,7 +94,7 @@ func NewPasswordResetToken(email string) *PasswordResetToken {
 	now := time.Now()
 	return &PasswordResetToken{
 		Id:             uuid.New(),
-		ExpirationDate: now.Add(time.Minute * 15),
+		ExpirationDate: now.Add(time.Hour * 24),
 		DateAdded:      now,
 		Email:          email,
 	}
