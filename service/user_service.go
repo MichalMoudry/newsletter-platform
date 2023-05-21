@@ -82,7 +82,6 @@ func (srvc UserService) ValidateLogin(_ context.Context, email, password string)
 	if err != nil {
 		return "", err
 	}
-
 	return token, nil
 }
 
@@ -108,7 +107,6 @@ func (srvc UserService) DeleteUser(ctx context.Context, email, concurrencyStamp 
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 
@@ -148,7 +146,6 @@ func (srvc UserService) UpdateUsersInfo(ctx context.Context, email, username, co
 	if err != nil {
 		return err
 	}
-
 	return nil
 }
 

@@ -17,6 +17,8 @@ var (
 	AddPassResetToken string
 	//go:embed scripts/commands/DeletePassResetToken.sql
 	DeletePassResetToken string
+	//go:embed scripts/commands/ResetPassword.sql
+	ResetPassword string
 
 	//go:embed scripts/queries/GetUser.sql
 	GetUser string

@@ -15,10 +15,17 @@ type ServiceCollection struct {
 }
 
 func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
+	userRepo := &repositories.UserRepository{}
+
 	return ServiceCollection{
 		UserService: service.NewUserService(
-			repositories.UserRepository{},
+			userRepo,
 			tokenAuth,
+		),
+		PassResetService: service.NewPassResetService(
+			repositories.PassResetRepository{},
+			userRepo,
+			service.NewEmailService(),
 		),
 	}
 }

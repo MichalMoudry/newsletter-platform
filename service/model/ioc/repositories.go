@@ -21,6 +21,9 @@ type IUserRepository interface {
 
 	// Method for updating user's general information in the database.
 	UpdateUser(data model.UserUpdateData) error
+
+	// Method for updating user's password.
+	UpdatePassword(email, passwordHash string) error
 }
 
 type IPassResetRepository interface {
@@ -28,8 +31,8 @@ type IPassResetRepository interface {
 	AddToken(token *model.PasswordResetToken) error
 
 	// Method for obtaining last/newest user's token.
-	GetUsersLastToken(email string) (model.PasswordResetToken, error)
+	GetUsersLastToken(tokenId uuid.UUID) (model.PassResetTokenData, error)
 
 	// Method for deleting one or more password reset tokens in the database.
-	DeleteTokens(tokens []model.PasswordResetToken) error
+	DeleteTokens(tokens []model.PassResetTokenData) error
 }

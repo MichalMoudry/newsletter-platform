@@ -9,4 +9,5 @@ var (
 	ErrJwtParsing                = errors.New("unable to parse JWT token")
 	ErrInvalidEmail              = errors.New("invalid email in the URL")
 	ErrInvalidLogin              = errors.New("invalid login information")
+	ErrPassResetTokenExpired     = errors.New("password reset token expired")
 )

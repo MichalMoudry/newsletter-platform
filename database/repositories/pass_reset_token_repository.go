@@ -4,6 +4,8 @@ import (
 	"newsletter-platform/database"
 	"newsletter-platform/database/model"
 	"newsletter-platform/database/query"
+
+	"github.com/google/uuid"
 )
 
 type PassResetRepository struct{}
@@ -22,22 +24,22 @@ func (PassResetRepository) AddToken(token *model.PasswordResetToken) error {
 }
 
 // Method for obtaining last/newest user's token.
-func (PassResetRepository) GetUsersLastToken(email string) (model.PasswordResetToken, error) {
+func (PassResetRepository) GetUsersLastToken(tokenId uuid.UUID) (model.PassResetTokenData, error) {
 	ctx, err := database.GetDbContext()
 	if err != nil {
-		return model.PasswordResetToken{}, err
+		return model.PassResetTokenData{}, err
 	}
 
-	var token model.PasswordResetToken
-	if err = ctx.Get(&token, query.GetLastPassResetToken); err != nil {
-		return model.PasswordResetToken{}, err
+	var token model.PassResetTokenData
+	if err = ctx.Get(&token, query.GetLastPassResetToken, tokenId); err != nil {
+		return model.PassResetTokenData{}, err
 	}
 
 	return token, nil
 }
 
 // Method for deleting one or more password reset tokens in the database.
-func (PassResetRepository) DeleteTokens(tokens []model.PasswordResetToken) error {
+func (PassResetRepository) DeleteTokens(tokens []model.PassResetTokenData) error {
 	ctx, err := database.GetDbContext()
 	if err != nil {
 		return err

@@ -18,7 +18,7 @@ func getEmailFromURL(r *http.Request) (string, error) {
 
 // Method for handling user registration requests.
 func (handler *Handler) RegisterUser(writer http.ResponseWriter, request *http.Request) {
-	var registerRequest contracts.RegisterUserRequest
+	var registerRequest contracts.RegisterUserRequestData
 	err := util.UnmarshallRequest(request, &registerRequest)
 	if err != nil {
 		util.WriteErrResponse(writer, http.StatusBadRequest, err)

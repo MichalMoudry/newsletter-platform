@@ -1,6 +1,10 @@
 package model
 
-import "github.com/google/uuid"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 // Structure encapsulating information available to the user.
 type UserInfo struct {
@@ -22,4 +26,10 @@ type UserUpdateData struct {
 	UserName            string    `db:"user_name"`
 	OldConcurrencyStamp uuid.UUID `db:"old_concurrency_stamp"`
 	NewConcurrencyStamp uuid.UUID `db:"new_concurrency_stamp"`
+}
+
+type PassResetTokenData struct {
+	Id             uuid.UUID `db:"id"`
+	ExpirationDate time.Time `db:"expiration_date"`
+	DateAdded      time.Time `db:"date_added"`
 }
