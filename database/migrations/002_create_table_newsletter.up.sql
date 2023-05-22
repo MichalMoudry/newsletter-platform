@@ -7,7 +7,7 @@ CREATE TABLE Newsletter (
     Nltr_Inserted_Datetime TIMESTAMP NOT NULL,
     Nltr_Updated_Datetime TIMESTAMP NOT NULL,
     Nltr_Author UUID NOT NULL,
-    concurrency_stamp VARCHAR(255) NOT NULL,
+    concurrency_stamp UUID NOT NULL,
     CONSTRAINT fk_user
         FOREIGN KEY(Nltr_Author)
             REFERENCES users(id)

@@ -20,10 +20,12 @@ type LoginData struct {
 	PasswordHash string    `db:"password_hash"`
 }
 
+// Structure encapsulating data that is need for updating user's information.
 type UserUpdateData struct {
 	UserId              uuid.UUID `db:"user_id"`
 	Email               string    `db:"email"`
 	UserName            string    `db:"user_name"`
+	UpdateDate          time.Time `db:"date_updated"`
 	OldConcurrencyStamp uuid.UUID `db:"old_concurrency_stamp"`
 	NewConcurrencyStamp uuid.UUID `db:"new_concurrency_stamp"`
 }
@@ -37,4 +39,12 @@ type PassResetTokenData struct {
 type NewsletterData struct {
 	Nltr_Name        string `db:"Nltr_Name"`
 	Nltr_Description string `db:"Nltr_Description"`
+	User                    // TODO: maybe replace?
+}
+
+type UpdateNewsletterData struct {
+	Nltr_Name           string    `db:"Nltr_Name"`
+	Nltr_Description    string    `db:"Nltr_Description"`
+	OldConcurrencyStamp uuid.UUID `db:"old_concurrency_stamp"`
+	NewConcurrencyStamp uuid.UUID `db:"new_concurrency_stamp"`
 }

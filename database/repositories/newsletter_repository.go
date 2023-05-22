@@ -23,12 +23,42 @@ func (NewsletterRepository) AddNewsletter(data *model.Newsletter) error {
 	return nil
 }
 
-func GetNewsletter(newsletterId uuid.UUID) (model.Newsletter, error) {
+// Method for obtaining data about a specific newsletter in the database.
+func (NewsletterRepository) GetNewsletter(newsletterId uuid.UUID) (model.NewsletterData, error) {
 	ctx, err := database.GetDbContext()
 	if err != nil {
-		return model.Newsletter{}, err
+		return model.NewsletterData{}, err
 	}
 
-	var newsletter model.Newsletter
+	var newsletter model.NewsletterData
+	if err = ctx.Select(&newsletter, query.GetNewsletter, newsletterId); err != nil {
+		return model.NewsletterData{}, err
+	}
 	return newsletter, err
+}
+
+// Method for updating specific newsletter data in the database.
+func (NewsletterRepository) UpdateNewsletter(data model.UpdateNewsletterData) error {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return err
+	}
+
+	if _, err = ctx.NamedExec(query.UpdateNewsletter, data); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Method for deleting a specific newsletter in the database.
+func (NewsletterRepository) DeleteNewsletter(newsletterId uuid.UUID) error {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return err
+	}
+
+	if _, err = ctx.Exec(query.DeleteNewsletter, newsletterId); err != nil {
+		return err
+	}
+	return nil
 }
