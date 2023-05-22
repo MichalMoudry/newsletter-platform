@@ -17,11 +17,25 @@ func (NewsletterRepository) AddNewsletter(data *model.Newsletter) (uuid.UUID, er
 		return uuid.Nil, err
 	}
 
-	_, err = ctx.NamedExec(query.CreateNewsletter, data)
+	rows, err := ctx.NamedQuery(query.CreateNewsletter, data)
 	if err != nil {
 		return uuid.Nil, err
 	}
-	return uuid.Nil, nil
+
+	var returnedId string
+	for rows.Next() {
+		err = rows.Scan(&returnedId)
+	}
+	if err != nil {
+		return uuid.Nil, err
+	}
+
+	newsletterId, err := uuid.Parse(returnedId)
+	if err != nil {
+		return uuid.Nil, err
+	}
+
+	return newsletterId, nil
 }
 
 // Method for obtaining data about a specific newsletter in the database.
@@ -32,7 +46,7 @@ func (NewsletterRepository) GetNewsletter(newsletterId uuid.UUID) (model.Newslet
 	}
 
 	var newsletter model.NewsletterData
-	if err = ctx.Select(&newsletter, query.GetNewsletter, newsletterId); err != nil {
+	if err = ctx.Get(&newsletter, query.GetNewsletter, newsletterId); err != nil {
 		return model.NewsletterData{}, err
 	}
 	return newsletter, err

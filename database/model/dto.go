@@ -37,10 +37,10 @@ type PassResetTokenData struct {
 }
 
 type NewsletterData struct {
-	Id               uuid.UUID `db:"Nltr_ID"`
-	Nltr_Name        string    `db:"Nltr_Name"`
-	Nltr_Description string    `db:"Nltr_Description"`
-	User                       // TODO: maybe replace?
+	Nltr_ID          uuid.UUID `db:"nltr_id"`
+	Nltr_Name        string    `db:"nltr_name"`
+	Nltr_Description string    `db:"nltr_description"`
+	UserName         string    `db:"user_name"`
 }
 
 type UpdateNewsletterData struct {

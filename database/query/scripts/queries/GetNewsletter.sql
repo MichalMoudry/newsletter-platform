@@ -8,4 +8,4 @@ FROM
 JOIN
     users as u on u.id = n.Nltr_Author
 WHERE
-    Nltr_ID = $1
+    n.Nltr_ID = $1
