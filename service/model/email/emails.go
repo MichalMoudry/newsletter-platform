@@ -11,5 +11,5 @@ var (
 
 const (
 	PassResetEmailSubject string = "Newsplatform - password reset"
-	PassResetEmailContent string = "" //TODO: Add text version of password reset email
+	PassResetEmailContent string = "Hello, We have received a request to reset your password. To do so, click the link below. This link is valid for twenty-four hours and can only be used once."
 )

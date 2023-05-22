@@ -9,6 +9,7 @@ import (
 	"newsletter-platform/service/model/ioc"
 	"newsletter-platform/service/util"
 	"newsletter-platform/transport/model/dto"
+	"time"
 
 	"github.com/go-chi/jwtauth/v5"
 	"github.com/google/uuid"
@@ -140,6 +141,7 @@ func (srvc UserService) UpdateUsersInfo(ctx context.Context, email, username, co
 		UserId:              userId,
 		Email:               email,
 		UserName:            username,
+		UpdateDate:          time.Now(),
 		OldConcurrencyStamp: oldConcurrencyStamp,
 		NewConcurrencyStamp: uuid.New(),
 	})

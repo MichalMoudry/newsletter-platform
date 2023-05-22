@@ -36,3 +36,17 @@ type IPassResetRepository interface {
 	// Method for deleting one or more password reset tokens in the database.
 	DeleteTokens(tokens []model.PassResetTokenData) error
 }
+
+type INewsletterRepository interface {
+	// Method for adding a new newsletter to the database.
+	AddNewsletter(data *model.Newsletter) (uuid.UUID, error)
+
+	// Method for obtaining data about a specific newsletter in the database.
+	GetNewsletter(newsletterId uuid.UUID) (model.NewsletterData, error)
+
+	// Method for updating specific newsletter data in the database.
+	UpdateNewsletter(data model.UpdateNewsletterData) error
+
+	// Method for deleting a specific newsletter in the database.
+	DeleteNewsletter(newsletterId uuid.UUID, authorId uuid.UUID) error
+}

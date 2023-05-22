@@ -6,7 +6,8 @@ INSERT INTO Newsletter (
     Nltr_Updated_Datetime,
     Nltr_Author,
     concurrency_stamp
-    ) VALUES
+    )
+VALUES
     (:Nltr_ID,
      :Nltr_Name,
      :Nltr_Description,
@@ -14,3 +15,5 @@ INSERT INTO Newsletter (
      :Nltr_Updated_Datetime,
      :Nltr_Author,
      :concurrency_stamp)
+RETURNING
+    Nltr_ID
