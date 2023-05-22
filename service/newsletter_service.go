@@ -4,7 +4,8 @@ import (
 	"context"
 	"fmt"
 	"newsletter-platform/database"
-	"newsletter-platform/database/model"
+	db_model "newsletter-platform/database/model"
+	"newsletter-platform/service/model"
 	"newsletter-platform/service/model/ioc"
 	"newsletter-platform/service/util"
 
@@ -36,7 +37,7 @@ func (srvc NewsletterService) CreateNewsletter(ctx context.Context, name, descri
 	defer func() { database.EndTransaction(tx, err) }()
 
 	err = srvc.NewsletterRepo.AddNewsletter(
-		model.NewNewsletter(name, description, author),
+		db_model.NewNewsletter(name, description, author),
 	)
 	if err != nil {
 		return err
@@ -45,22 +46,37 @@ func (srvc NewsletterService) CreateNewsletter(ctx context.Context, name, descri
 }
 
 // Method for obtaining a specific newsletter that is stored in the system.
-func (srvc NewsletterService) GetNewsletter(_ context.Context, newsletterId string) (model.NewsletterData, error) {
+func (srvc NewsletterService) GetNewsletter(_ context.Context, newsletterId string) (db_model.NewsletterData, error) {
 	id, err := uuid.Parse(newsletterId)
 	if err != nil {
-		return model.NewsletterData{}, err
+		return db_model.NewsletterData{}, err
 	}
 
 	data, err := srvc.NewsletterRepo.GetNewsletter(id)
 	if err != nil {
-		return model.NewsletterData{}, err
+		return db_model.NewsletterData{}, err
 	}
 
 	return data, nil
 }
 
 // Method for updating a newsletter in the system.
-func UpdateNewsletter(ctx context.Context) (err error) {
+func (srvc NewsletterService) UpdateNewsletter(ctx context.Context, data model.NewsletterUpdateModel) (err error) {
+	tx, err := database.BeginTransaction(ctx)
+	if err != nil {
+		return err
+	}
+	defer func() { database.EndTransaction(tx, err) }()
+
+	err = srvc.NewsletterRepo.UpdateNewsletter(db_model.UpdateNewsletterData{
+		Nltr_Name:           data.Name,
+		Nltr_Description:    data.Description,
+		OldConcurrencyStamp: data.OldConcurrencyStamp,
+		NewConcurrencyStamp: data.NewConcurrencyStamp,
+	})
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
