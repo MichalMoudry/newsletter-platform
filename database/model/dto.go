@@ -33,3 +33,8 @@ type PassResetTokenData struct {
 	ExpirationDate time.Time `db:"expiration_date"`
 	DateAdded      time.Time `db:"date_added"`
 }
+
+type NewsletterData struct {
+	Nltr_Name        string `db:"Nltr_Name"`
+	Nltr_Description string `db:"Nltr_Description"`
+}

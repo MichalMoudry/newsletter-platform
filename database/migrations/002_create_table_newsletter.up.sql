@@ -1,7 +1,7 @@
 BEGIN;
 
 CREATE TABLE Newsletter (
-    Nltr_ID integer PRIMARY KEY,
+    Nltr_ID UUID PRIMARY KEY,
     Nltr_Name VARCHAR(255) NOT NULL UNIQUE,
     Nltr_Description VARCHAR(5000) NOT NULL,
     Nltr_Inserted_Datetime TIMESTAMP NOT NULL,
