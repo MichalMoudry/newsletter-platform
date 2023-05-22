@@ -10,7 +10,7 @@ type Newsletter struct {
 	Nltr_ID                uuid.UUID `db:"Nltr_ID"`
 	Nltr_Name              string    `db:"Nltr_Name"`
 	Nltr_Description       string    `db:"Nltr_Description"`
-	Nltr_Inserted_Datetime time.Time `db:"Nltr_Inserted_Datetime,"`
+	Nltr_Inserted_Datetime time.Time `db:"Nltr_Inserted_Datetime"`
 	Nltr_Updated_Datetime  time.Time `db:"Nltr_Updated_Datetime"`
 	Nltr_Author            uuid.UUID `db:"Nltr_Author"`
 	ConcurrencyStamp       uuid.UUID `db:"concurrency_stamp"`
@@ -31,21 +31,21 @@ func NewNewsletter(Nltr_Name, Nltr_Description string, Nltr_Author uuid.UUID) *N
 
 type Post struct {
 	Post_ID                uuid.UUID `db:"Post_ID"`
-	Post_Name              string    `db:"Post_Name"`
+	Post_Title             string    `db:"Post_Title"`
 	Post_Content           string    `db:"Post_Content"`
-	Post_Publishing_Date   time.Time `db:"Post_Inserted_Datetime,"`
-	Post_Inserted_Datetime time.Time `db:"Post_Inserted_Datetime,"`
+	Post_Publishing_Date   time.Time `db:"Post_Inserted_Datetime"`
+	Post_Inserted_Datetime time.Time `db:"Post_Inserted_Datetime"`
 	Post_Updated_Datetime  time.Time `db:"Post_Updated_Datetime"`
 	Post_Author            uuid.UUID `db:"Post_Author"`
 	Nltr_ID                uuid.UUID `db:"Nltr_ID"`
 	concurrency_stamp      uuid.UUID `db:"concurrency_stamp"`
 }
 
-func NewPost(Post_Name, Post_Content string, Post_Author, Nltr_ID uuid.UUID) *Post {
+func NewPost(Post_Title, Post_Content string, Post_Author, Nltr_ID uuid.UUID) *Post {
 	now := time.Now()
 	return &Post{
 		Post_ID:                uuid.New(),
-		Post_Name:              Post_Name,
+		Post_Title:             Post_Title,
 		Post_Content:           Post_Content,
 		Post_Publishing_Date:   now,
 		Post_Inserted_Datetime: now,
