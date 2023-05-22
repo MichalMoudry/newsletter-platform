@@ -40,7 +40,7 @@ type INewsletterService interface {
 	CreateNewsletter(ctx context.Context, name, description string) error
 
 	// Method for obtaining a specific newsletter that is stored in the system.
-	GetNewsletter(_ context.Context, newsletterId string) (model.NewsletterData, error)
+	GetNewsletter(ctx context.Context, newsletterId string) (model.NewsletterData, error)
 
 	// Method for updating a newsletter in the system.
 	UpdateNewsletter(ctx context.Context, data service_model.NewsletterUpdateModel) error
