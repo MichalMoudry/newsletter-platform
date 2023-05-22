@@ -5,6 +5,8 @@ import (
 	"newsletter-platform/database/model"
 	service_model "newsletter-platform/service/model"
 	"newsletter-platform/transport/model/dto"
+
+	"github.com/google/uuid"
 )
 
 // Service for working with users.
@@ -37,14 +39,14 @@ type IPassResetService interface {
 // Service for working with newsletters.
 type INewsletterService interface {
 	// Method for creating a new newsletter in the system.
-	CreateNewsletter(ctx context.Context, name, description string) error
+	CreateNewsletter(ctx context.Context, name, description string) (uuid.UUID, error)
 
 	// Method for obtaining a specific newsletter that is stored in the system.
-	GetNewsletter(ctx context.Context, newsletterId string) (model.NewsletterData, error)
+	GetNewsletter(ctx context.Context, newsletterId uuid.UUID) (model.NewsletterData, error)
 
 	// Method for updating a newsletter in the system.
 	UpdateNewsletter(ctx context.Context, data service_model.NewsletterUpdateModel) error
 
 	// Method for deleting a specific newsletter in the system.
-	DeleteNewsletter(ctx context.Context, newsletterId string) error
+	DeleteNewsletter(ctx context.Context, newsletterId uuid.UUID) error
 }

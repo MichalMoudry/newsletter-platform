@@ -1,4 +1,5 @@
 SELECT
+    n.Nltr_ID,
     n.Nltr_Name,
     n.Nltr_Description,
     u.user_name

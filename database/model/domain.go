@@ -13,7 +13,7 @@ type Newsletter struct {
 	Nltr_Inserted_Datetime time.Time `db:"Nltr_Inserted_Datetime,"`
 	Nltr_Updated_Datetime  time.Time `db:"Nltr_Updated_Datetime"`
 	Nltr_Author            uuid.UUID `db:"Nltr_Author"`
-	concurrency_stamp      uuid.UUID `db:"concurrency_stamp"`
+	ConcurrencyStamp       uuid.UUID `db:"concurrency_stamp"`
 }
 
 func NewNewsletter(Nltr_Name, Nltr_Description string, Nltr_Author uuid.UUID) *Newsletter {
@@ -25,7 +25,7 @@ func NewNewsletter(Nltr_Name, Nltr_Description string, Nltr_Author uuid.UUID) *N
 		Nltr_Inserted_Datetime: now,
 		Nltr_Updated_Datetime:  now,
 		Nltr_Author:            Nltr_Author,
-		concurrency_stamp:      uuid.New(),
+		ConcurrencyStamp:       uuid.New(),
 	}
 }
 

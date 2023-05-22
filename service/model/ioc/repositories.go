@@ -39,7 +39,7 @@ type IPassResetRepository interface {
 
 type INewsletterRepository interface {
 	// Method for adding a new newsletter to the database.
-	AddNewsletter(data *model.Newsletter) error
+	AddNewsletter(data *model.Newsletter) (uuid.UUID, error)
 
 	// Method for obtaining data about a specific newsletter in the database.
 	GetNewsletter(newsletterId uuid.UUID) (model.NewsletterData, error)
@@ -48,5 +48,5 @@ type INewsletterRepository interface {
 	UpdateNewsletter(data model.UpdateNewsletterData) error
 
 	// Method for deleting a specific newsletter in the database.
-	DeleteNewsletter(newsletterId uuid.UUID) error
+	DeleteNewsletter(newsletterId uuid.UUID, authorId uuid.UUID) error
 }

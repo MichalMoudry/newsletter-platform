@@ -29,3 +29,14 @@ type PassResetRequestData struct {
 	Password string `json:"new_password" validate:"required,min=8"`
 	TokenId  string `json:"token_id" validate:"required"`
 }
+
+type CreateNewsletterRequestData struct {
+	Name        string `json:"name" validate:"required"`
+	Description string `json:"description" validate:"required"`
+}
+
+type UpdateNewsletterRequestData struct {
+	Name             string `json:"name" validate:"required"`
+	Description      string `json:"description" validate:"required"`
+	ConcurrencyStamp string `json:"concurrency_stamp" validate:"required"`
+}

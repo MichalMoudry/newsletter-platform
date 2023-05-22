@@ -8,7 +8,7 @@ CREATE TABLE Post (
     Post_Inserted_Datetime TIMESTAMP NOT NULL,
     Post_Updated_Datetime TIMESTAMP NOT NULL,
     Post_Author UUID NOT NULL,
-    Nltr_ID integer NOT NULL,
+    Nltr_ID UUID NOT NULL,
     concurrency_stamp UUID NOT NULL,
     CONSTRAINT fk_newsletter_id
         FOREIGN KEY(Nltr_ID)

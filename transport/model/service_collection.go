@@ -10,8 +10,9 @@ import (
 
 // Structure for encapsulating all services.
 type ServiceCollection struct {
-	UserService      ioc.IUserService
-	PassResetService ioc.IPassResetService
+	UserService       ioc.IUserService
+	PassResetService  ioc.IPassResetService
+	NewsletterService ioc.INewsletterService
 }
 
 func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
@@ -26,6 +27,9 @@ func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
 			repositories.PassResetRepository{},
 			userRepo,
 			service.NewEmailService(),
+		),
+		NewsletterService: service.NewNewsletterService(
+			repositories.NewsletterRepository{},
 		),
 	}
 }

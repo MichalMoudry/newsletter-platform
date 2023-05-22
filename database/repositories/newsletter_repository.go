@@ -11,16 +11,17 @@ import (
 type NewsletterRepository struct{}
 
 // Method for adding a new newsletter to the database.
-func (NewsletterRepository) AddNewsletter(data *model.Newsletter) error {
+func (NewsletterRepository) AddNewsletter(data *model.Newsletter) (uuid.UUID, error) {
 	ctx, err := database.GetDbContext()
 	if err != nil {
-		return err
+		return uuid.Nil, err
 	}
 
-	if _, err = ctx.NamedQuery(query.CreateNewsletter, data); err != nil {
-		return err
+	_, err = ctx.NamedExec(query.CreateNewsletter, data)
+	if err != nil {
+		return uuid.Nil, err
 	}
-	return nil
+	return uuid.Nil, nil
 }
 
 // Method for obtaining data about a specific newsletter in the database.
@@ -51,13 +52,13 @@ func (NewsletterRepository) UpdateNewsletter(data model.UpdateNewsletterData) er
 }
 
 // Method for deleting a specific newsletter in the database.
-func (NewsletterRepository) DeleteNewsletter(newsletterId uuid.UUID) error {
+func (NewsletterRepository) DeleteNewsletter(newsletterId, authorId uuid.UUID) error {
 	ctx, err := database.GetDbContext()
 	if err != nil {
 		return err
 	}
 
-	if _, err = ctx.Exec(query.DeleteNewsletter, newsletterId); err != nil {
+	if _, err = ctx.Exec(query.DeleteNewsletter, newsletterId, authorId); err != nil {
 		return err
 	}
 	return nil

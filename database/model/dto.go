@@ -37,14 +37,18 @@ type PassResetTokenData struct {
 }
 
 type NewsletterData struct {
-	Nltr_Name        string `db:"Nltr_Name"`
-	Nltr_Description string `db:"Nltr_Description"`
-	User                    // TODO: maybe replace?
+	Id               uuid.UUID `db:"Nltr_ID"`
+	Nltr_Name        string    `db:"Nltr_Name"`
+	Nltr_Description string    `db:"Nltr_Description"`
+	User                       // TODO: maybe replace?
 }
 
 type UpdateNewsletterData struct {
+	Id                  uuid.UUID `db:"Nltr_ID"`
 	Nltr_Name           string    `db:"Nltr_Name"`
 	Nltr_Description    string    `db:"Nltr_Description"`
+	AuthorId            uuid.UUID `db:"Nltr_Author"`
 	OldConcurrencyStamp uuid.UUID `db:"old_concurrency_stamp"`
 	NewConcurrencyStamp uuid.UUID `db:"new_concurrency_stamp"`
+	UpdateDate          time.Time `db:"Nltr_Updated_Datetime"`
 }
