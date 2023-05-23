@@ -50,3 +50,12 @@ type INewsletterService interface {
 	// Method for deleting a specific newsletter in the system.
 	DeleteNewsletter(ctx context.Context, newsletterId uuid.UUID) error
 }
+
+// Method for canceling a subscription in the system.
+type ISubscriptionService interface {
+	// Method for creating a new subscription in the system.
+	CreateSubscription(ctx context.Context, email string, newsletterId uuid.UUID) error
+
+	// Method for cancelling a subscription in the system.
+	CancelSubscription(ctx context.Context, email string, newsletterId uuid.UUID) error
+}

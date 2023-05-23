@@ -117,10 +117,10 @@ func NewSubscriber(email string) *Subscriber {
 type NewsletterSubscription struct {
 	Id           uuid.UUID `db:"id"`
 	NewsletterId uuid.UUID `db:"newsletter_id"`
-	SubscriberId uuid.UUID `db:"subscriber_id"`
+	SubscriberId string    `db:"subscriber_id"`
 }
 
-func NewNewsletterSubscription(newsletterId, subscriberId uuid.UUID) *NewsletterSubscription {
+func NewNewsletterSubscription(newsletterId uuid.UUID, subscriberId string) *NewsletterSubscription {
 	return &NewsletterSubscription{
 		Id:           uuid.New(),
 		NewsletterId: newsletterId,

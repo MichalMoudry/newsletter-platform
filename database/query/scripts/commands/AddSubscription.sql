@@ -1,4 +1,4 @@
-INSERT INTO newsletter_subcriptions (
+INSERT INTO newsletter_subscriptions (
     id,
     newsletter_id,
     subscriber_id

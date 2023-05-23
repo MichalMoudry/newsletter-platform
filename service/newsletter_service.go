@@ -34,7 +34,7 @@ func (srvc NewsletterService) CreateNewsletter(ctx context.Context, name, descri
 	if err != nil {
 		return uuid.Nil, err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	newsletterId, err = srvc.NewsletterRepo.AddNewsletter(
 		db_model.NewNewsletter(name, description, userId),
@@ -66,7 +66,7 @@ func (srvc NewsletterService) UpdateNewsletter(ctx context.Context, data model.N
 	if err != nil {
 		return err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	err = srvc.NewsletterRepo.UpdateNewsletter(db_model.UpdateNewsletterData{
 		Nltr_Name:           data.Name,
@@ -94,7 +94,7 @@ func (srvc NewsletterService) DeleteNewsletter(ctx context.Context, newsletterId
 	if err != nil {
 		return err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	if err = srvc.NewsletterRepo.DeleteNewsletter(newsletterId, userId); err != nil {
 		return err

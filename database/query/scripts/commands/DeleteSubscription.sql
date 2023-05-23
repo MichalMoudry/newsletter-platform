@@ -1,4 +1,6 @@
 DELETE FROM
-    newsletter_subcriptions
+    newsletter_subscriptions
 WHERE
-    id = $1
+    subscriber_id = $1
+AND
+    newsletter_id = $2

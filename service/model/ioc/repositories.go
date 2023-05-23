@@ -50,3 +50,22 @@ type INewsletterRepository interface {
 	// Method for deleting a specific newsletter in the database.
 	DeleteNewsletter(newsletterId uuid.UUID, authorId uuid.UUID) error
 }
+
+type ISubscriberRepository interface {
+	// Method for adding a new subscriber to the database.
+	AddSubscriber(sub *model.Subscriber) error
+
+	// Method for obtaining information about a subscriber from the database.
+	GetSubscriber(email string) (model.SubscriberInformation, error)
+
+	// Method for deleting a subscriber from the database.
+	DeleteSubscriber(id uuid.UUID) error
+}
+
+type ISubscriptionRepository interface {
+	// Method for adding a new subscription to the database.
+	AddSubscription(sub *model.NewsletterSubscription) error
+
+	// Method for deleting a specific subscription in the database.
+	DeleteSubscription(email string, newsletterId uuid.UUID) error
+}

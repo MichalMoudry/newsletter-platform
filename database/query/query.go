@@ -29,6 +29,8 @@ var (
 	DeleteSubscription string
 	//go:embed scripts/commands/AddSubscriber.sql
 	AddSubscriber string
+	//go:embed scripts/commands/DeleteSubscriber.sql
+	DeleteSubscriber string
 
 	//go:embed scripts/queries/GetUser.sql
 	GetUser string
@@ -38,4 +40,6 @@ var (
 	GetPassResetToken string
 	//go:embed scripts/queries/GetNewsletter.sql
 	GetNewsletter string
+	//go:embed scripts/queries/GetSubscriber.sql
+	GetSubscriber string
 )

@@ -53,10 +53,11 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 	handler.Mux.Post("/login", handler.Login)
 	handler.Mux.Post("/passwordresetrequests", handler.GenerateNewPassResetToken)
 	handler.Mux.Patch("/.well-known/change-password", handler.ResetUsersPassword)
-	handler.Mux.Post("/newsletters/{uuid}/subscribe", nil) //TODO: replace nil
 
-	handler.Mux.Route("/subscribers", func(r chi.Router) {})
-	handler.Mux.Route("/subscriptions", func(r chi.Router) {})
+	handler.Mux.Route("/subscriptions", func(r chi.Router) {
+		r.Post("/", handler.RegisterSubscription)
+		r.Delete("/{uuid}", handler.NewsletterUnsubscribe)
+	})
 
 	return handler
 }

@@ -52,3 +52,8 @@ type UpdateNewsletterData struct {
 	NewConcurrencyStamp uuid.UUID `db:"new_concurrency_stamp"`
 	UpdateDate          time.Time `db:"Nltr_Updated_Datetime"`
 }
+
+type SubscriberInformation struct {
+	Id    uuid.UUID `db:"id"`
+	Email string    `db:"email"`
+}

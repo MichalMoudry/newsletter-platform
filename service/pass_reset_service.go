@@ -41,7 +41,7 @@ func (srvc PassResetService) GenerateNewToken(ctx context.Context, email string)
 	}
 	token := model.NewPasswordResetToken(email)
 	defer func() {
-		database.EndTransaction(tx, err)
+		err = database.EndTransaction(tx, err)
 		if err == nil {
 			err = srvc.EmailService.Send(
 				email,
@@ -68,7 +68,7 @@ func (srvc PassResetService) ResetPassword(ctx context.Context, email, password,
 	if err != nil {
 		return err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	// Verify token
 	token, err := srvc.PassResetRepo.GetPassResetToken(parsedToken)

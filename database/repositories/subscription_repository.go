@@ -23,13 +23,13 @@ func (SubscriptionRepository) AddSubscription(sub *model.NewsletterSubscription)
 	return nil
 }
 
-// Method for deleting a specific subscription.
-func (SubscriptionRepository) DeleteSubscription(id uuid.UUID) error {
+// Method for deleting a specific subscription in the database.
+func (SubscriptionRepository) DeleteSubscription(email string, newsletterId uuid.UUID) error {
 	ctx, err := database.GetDbContext()
 	if err != nil {
 		return err
 	}
-	if _, err = ctx.NamedExec(query.DeleteNewsletter, id); err != nil {
+	if _, err = ctx.Exec(query.DeleteNewsletter, email, newsletterId); err != nil {
 		return err
 	}
 	return nil
