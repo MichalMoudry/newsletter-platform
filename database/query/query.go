@@ -23,6 +23,12 @@ var (
 	DeleteNewsletter string
 	//go:embed scripts/commands/UpdateNewsletter.sql
 	UpdateNewsletter string
+	//go:embed scripts/commands/AddSubscription.sql
+	AddSubscription string
+	//go:embed scripts/commands/DeleteSubscription.sql
+	DeleteSubscription string
+	//go:embed scripts/commands/AddSubscriber.sql
+	AddSubscriber string
 
 	//go:embed scripts/queries/GetUser.sql
 	GetUser string
