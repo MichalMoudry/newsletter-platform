@@ -57,3 +57,22 @@ type SubscriberInformation struct {
 	Id    uuid.UUID `db:"id"`
 	Email string    `db:"email"`
 }
+
+type PostData struct {
+	Post_ID      uuid.UUID `db:"Post_ID"`
+	Post_Title    string    `db:"Post_Title"`
+	Post_Content string    `db:"Post_Content"`
+	Nltr_ID      uuid.UUID `db:"Nltr_ID"`
+}
+
+type UpdatePostData struct {
+	Id                   uuid.UUID `db:"Post_ID"`
+	Post_Title           string    `db:"Post_Title"`
+	Post_Content         string    `db:"Post_Content"`
+	Post_Publishing_Date time.Time `db:"Post_Inserted_Datetime"`
+	Inserted_Datetime    time.Time `db:"Post_Inserted_Datetime"`
+	Updated_Datetime     time.Time `db:"Post_Updated_Datetime"`
+	authorId             uuid.UUID `db:"Post_Author"`
+	Nltr_ID              uuid.UUID `db:"Nltr_ID"`
+	concurrency_stamp    uuid.UUID `db:"concurrency_stamp"`
+}
