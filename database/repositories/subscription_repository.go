@@ -29,7 +29,7 @@ func (SubscriptionRepository) DeleteSubscription(email string, newsletterId uuid
 	if err != nil {
 		return err
 	}
-	if _, err = ctx.Exec(query.DeleteNewsletter, email, newsletterId); err != nil {
+	if _, err = ctx.Exec(query.DeleteSubscription, email, newsletterId); err != nil {
 		return err
 	}
 	return nil
