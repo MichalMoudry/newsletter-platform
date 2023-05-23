@@ -32,10 +32,6 @@ var (
 	DeletePassResetToken string
 	//go:embed scripts/commands/ResetPassword.sql
 	ResetPassword string
-	//go:embed scripts/commands/DeleteNewsletter.sql
-	DeleteNewsletter string
-	//go:embed scripts/commands/UpdateNewsletter.sql
-	UpdateNewsletter string
 	//go:embed scripts/commands/AddSubscription.sql
 	AddSubscription string
 	//go:embed scripts/commands/DeleteSubscription.sql
