@@ -1,4 +1,4 @@
-name: Deploy to Azure Container Apps
+name: Deploy to Azure
 on:
   release:
     types: [published]
@@ -6,7 +6,7 @@ on:
 
 jobs:
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Push Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -27,14 +27,14 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
-          context: ./
+          context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   
   deploy:
     if: false
-    name: Deploy to Azure
+    name: Deploy
     runs-on: ubuntu-latest
     needs: [push_to_registry]
     steps:

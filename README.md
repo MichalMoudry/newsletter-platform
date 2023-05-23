@@ -17,6 +17,9 @@ API should be able to serve both mobile apps and websites using REST API. The AP
 ## Description source
 MICROSERVICE DEVELOPMENT W/ GO, SEMESTRAL WORK - Version 0.1.0
 
+# Getting started
+
+
 # Project structure
 - **App entrypoint** - Web API's entrypoint.
     - Entrypoint is located in /cmd/main.go.
@@ -29,9 +32,6 @@ MICROSERVICE DEVELOPMENT W/ GO, SEMESTRAL WORK - Version 0.1.0
 
 # Documentation
 Additional information regarding this system is stored in our [wiki](https://github.com/MichalMoudry/newsletter-platform/wiki "Newsletter platform - wiki pages").
-
-# Security
-
 
 # Used libraries
 ...
