@@ -11,6 +11,9 @@ services:
     environment:
       APP_ENVIRONMENT: prod
       CONNECTION_STRING: "postgres://root:root@db:5432/newsletter-platform-db?sslmode=disable"
+      EMAIL_SENDER_IDENTITY: "" # Need to be set
+      SENDGRID_API_KEY: "" # Need to be set
+      SECURITY_STRING: "124c7a74d2707905a"
     depends_on:
       migrate:
         condition: service_completed_successfully
