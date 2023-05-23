@@ -79,7 +79,6 @@ func Test_ContractValidation(t *testing.T) {
 			},
 			wantErr: true,
 		},
-		// TODO: Add tests for checking validity of a password (e.g. length, characters included, ...)
 		{
 			name: "Test correct login request DTO",
 			args: args{

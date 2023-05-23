@@ -40,3 +40,12 @@ type UpdateNewsletterRequestData struct {
 	Description      string `json:"description" validate:"required"`
 	ConcurrencyStamp string `json:"concurrency_stamp" validate:"required"`
 }
+
+type RegisterSubscriptionRequestData struct {
+	Email        string `json:"email" validate:"required"`
+	NewsletterId string `json:"newsletter_id" validate:"required"`
+}
+
+type CancelSubscriptionRequestData struct {
+	Email string `json:"email" validate:"required"`
+}

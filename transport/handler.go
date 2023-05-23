@@ -54,6 +54,11 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 	handler.Mux.Post("/passwordresetrequests", handler.GenerateNewPassResetToken)
 	handler.Mux.Patch("/.well-known/change-password", handler.ResetUsersPassword)
 
+	handler.Mux.Route("/subscriptions", func(r chi.Router) {
+		r.Post("/", handler.RegisterSubscription)
+		r.Delete("/{uuid}", handler.NewsletterUnsubscribe)
+	})
+
 	return handler
 }
 

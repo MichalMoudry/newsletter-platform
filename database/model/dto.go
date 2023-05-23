@@ -53,6 +53,11 @@ type UpdateNewsletterData struct {
 	UpdateDate          time.Time `db:"Nltr_Updated_Datetime"`
 }
 
+type SubscriberInformation struct {
+	Id    uuid.UUID `db:"id"`
+	Email string    `db:"email"`
+}
+
 type PostData struct {
 	Post_ID      uuid.UUID `db:"Post_ID"`
 	Post_Title    string    `db:"Post_Title"`

@@ -99,3 +99,31 @@ func NewPasswordResetToken(email string) *PasswordResetToken {
 		Email:          email,
 	}
 }
+
+type Subscriber struct {
+	Id        uuid.UUID `db:"id"`
+	Email     string    `db:"email"`
+	DateAdded time.Time `db:"date_added"`
+}
+
+func NewSubscriber(email string) *Subscriber {
+	return &Subscriber{
+		Id:        uuid.New(),
+		Email:     email,
+		DateAdded: time.Now(),
+	}
+}
+
+type NewsletterSubscription struct {
+	Id           uuid.UUID `db:"id"`
+	NewsletterId uuid.UUID `db:"newsletter_id"`
+	SubscriberId string    `db:"subscriber_id"`
+}
+
+func NewNewsletterSubscription(newsletterId uuid.UUID, subscriberId string) *NewsletterSubscription {
+	return &NewsletterSubscription{
+		Id:           uuid.New(),
+		NewsletterId: newsletterId,
+		SubscriberId: subscriberId,
+	}
+}

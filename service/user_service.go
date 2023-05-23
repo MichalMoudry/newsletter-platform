@@ -35,7 +35,7 @@ func (srvc UserService) CreateUser(ctx context.Context, data dto.NewUserData) (e
 	if err != nil {
 		return err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	err = srvc.UserRepo.AddUser(
 		model.NewUser(
@@ -92,7 +92,7 @@ func (srvc UserService) DeleteUser(ctx context.Context, email, concurrencyStamp 
 	if err != nil {
 		return err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	err = validateEmailWithContext(ctx, email)
 	if err != nil {
@@ -117,7 +117,7 @@ func (srvc UserService) UpdateUsersInfo(ctx context.Context, email, username, co
 	if err != nil {
 		return err
 	}
-	defer func() { database.EndTransaction(tx, err) }()
+	defer func() { err = database.EndTransaction(tx, err) }()
 
 	err = validateEmailWithContext(ctx, email)
 	if err != nil {
