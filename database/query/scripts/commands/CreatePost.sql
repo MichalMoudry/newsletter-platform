@@ -18,3 +18,5 @@ INSERT INTO Post (
      :Nltr_ID,
      :Post_Author,
      :concurrency_stamp)
+RETURNING
+    Post_ID

@@ -1,9 +1,9 @@
 package repositories
 
 import (
-	"Post-platform/database"
-	"Post-platform/database/model"
-	"Post-platform/database/query"
+	"newsletter-platform/database"
+	"newsletter-platform/database/model"
+	"newsletter-platform/database/query"
 
 	"github.com/google/uuid"
 )
@@ -46,7 +46,7 @@ func (PostRepository) GetPost(postId uuid.UUID) (model.PostData, error) {
 	}
 
 	var post model.PostData
-	if err = ctx.Get(&post, query.GetPost, PostId); err != nil {
+	if err = ctx.Get(&post, query.GetPost, postId); err != nil {
 		return model.PostData{}, err
 	}
 	return post, err
