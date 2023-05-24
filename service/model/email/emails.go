@@ -7,6 +7,8 @@ import (
 var (
 	//go:embed content/PasswordResetEmail.html
 	PassResetEmailHtmlContent string
+	//go:embed content/PostEmail.html
+	PostEmailContent string
 )
 
 const (

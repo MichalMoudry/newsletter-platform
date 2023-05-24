@@ -59,3 +59,13 @@ type ISubscriptionService interface {
 	// Method for cancelling a subscription in the system.
 	CancelSubscription(ctx context.Context, email string, newsletterId uuid.UUID) error
 }
+
+type IPostService interface {
+	// Method for creating a new post in the system.
+	CreateNewPost(ctx context.Context, data service_model.PostCreateModel) (uuid.UUID, error)
+
+	// Method for obtaining post information from the system.
+	GetPost(ctx context.Context, postId uuid.UUID) (model.PostData, error)
+
+	DeletePost(ctx context.Context, postId uuid.UUID) error
+}

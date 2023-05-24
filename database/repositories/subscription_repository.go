@@ -36,6 +36,6 @@ func (SubscriptionRepository) DeleteSubscription(email string, newsletterId uuid
 }
 
 // Method for obtaining list of newsletter subscribers.
-func (SubscriptionRepository) GetNewsletterSubscriptions(newsletterId uuid.UUID) ([]string, error) {
-	return nil, nil
+func (SubscriptionRepository) GetNewsletterSubscriptions(newsletterId uuid.UUID) (model.NewsletterSubscriptions, error) {
+	return model.NewsletterSubscriptions{}, nil
 }

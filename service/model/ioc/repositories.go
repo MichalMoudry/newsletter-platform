@@ -70,9 +70,10 @@ type ISubscriptionRepository interface {
 	DeleteSubscription(email string, newsletterId uuid.UUID) error
 
 	// Method for obtaining list of newsletter subscribers.
-	GetNewsletterSubscriptions(newsletterId uuid.UUID) ([]string, error)
+	GetNewsletterSubscriptions(newsletterId uuid.UUID) (model.NewsletterSubscriptions, error)
 }
 
+// Function for deleting a specific post in the system.
 type IPostRepository interface {
 	// Method for adding a new post to the database.
 	AddPost(data *model.Post) (uuid.UUID, error)

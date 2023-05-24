@@ -2,9 +2,11 @@ package service
 
 import (
 	"context"
+	"fmt"
 	"newsletter-platform/database"
 	db_model "newsletter-platform/database/model"
 	"newsletter-platform/service/model"
+	"newsletter-platform/service/model/email"
 	"newsletter-platform/service/model/ioc"
 
 	"github.com/google/uuid"
@@ -30,17 +32,19 @@ func (srvc PostService) CreateNewPost(ctx context.Context, data model.PostCreate
 	if err != nil {
 		return uuid.Nil, err
 	}
+	subs, err := srvc.SubscriptionRepository.GetNewsletterSubscriptions(data.NewsletterId)
+	if err != nil {
+		return uuid.Nil, err
+	}
 	defer func() {
 		err = database.EndTransaction(tx, err)
 		if err == nil {
-			subs, err := srvc.SubscriptionRepository.GetNewsletterSubscriptions(data.NewsletterId)
-			if err != nil {
-				return
-			}
-			err = srvc.EmailService.SendBatch(subs, "subject", "content", "htmlContent")
-			if err != nil {
-				return
-			}
+			err = srvc.EmailService.SendBatch(
+				subs.Subscribers,
+				fmt.Sprintf("%s - %s", subs.NewsletterName, data.Title),
+				data.Content,
+				fmt.Sprintf(email.PostEmailContent, data.Content),
+			)
 		}
 	}()
 
