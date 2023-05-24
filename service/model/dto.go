@@ -12,6 +12,5 @@ type NewsletterUpdateModel struct {
 type PostCreateModel struct {
 	Title        string
 	Content      string
-	AuthorId     uuid.UUID
 	NewsletterId uuid.UUID
 }

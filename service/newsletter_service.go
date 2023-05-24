@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 	"newsletter-platform/database"
 	db_model "newsletter-platform/database/model"
 	"newsletter-platform/service/model"
@@ -25,7 +24,7 @@ func NewNewsletterService(newsletterRepo ioc.INewsletterRepository) NewsletterSe
 
 // Method for creating a new newsletter in the system.
 func (srvc NewsletterService) CreateNewsletter(ctx context.Context, name, description string) (newsletterId uuid.UUID, err error) {
-	userId, err := getUserIdFromContext(ctx)
+	userId, err := util.GetUserIdFromContext(ctx)
 	if err != nil {
 		return uuid.Nil, err
 	}
@@ -57,7 +56,7 @@ func (srvc NewsletterService) GetNewsletter(_ context.Context, newsletterId uuid
 
 // Method for updating a newsletter in the system.
 func (srvc NewsletterService) UpdateNewsletter(ctx context.Context, data model.NewsletterUpdateModel) (err error) {
-	userId, err := getUserIdFromContext(ctx)
+	userId, err := util.GetUserIdFromContext(ctx)
 	if err != nil {
 		return err
 	}
@@ -85,7 +84,7 @@ func (srvc NewsletterService) UpdateNewsletter(ctx context.Context, data model.N
 
 // Method for deleting a specific newsletter in the system.
 func (srvc NewsletterService) DeleteNewsletter(ctx context.Context, newsletterId uuid.UUID) (err error) {
-	userId, err := getUserIdFromContext(ctx)
+	userId, err := util.GetUserIdFromContext(ctx)
 	if err != nil {
 		return err
 	}
@@ -100,13 +99,4 @@ func (srvc NewsletterService) DeleteNewsletter(ctx context.Context, newsletterId
 		return err
 	}
 	return nil
-}
-
-// Function for obtaining a user id from context.
-func getUserIdFromContext(ctx context.Context) (uuid.UUID, error) {
-	claims, err := util.GetClaimsFromContext(ctx)
-	if err != nil {
-		return uuid.Nil, err
-	}
-	return uuid.Parse(fmt.Sprint(claims["user_id"]))
 }

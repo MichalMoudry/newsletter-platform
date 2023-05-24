@@ -8,6 +8,7 @@ import (
 	"newsletter-platform/service/model"
 	"newsletter-platform/service/model/email"
 	"newsletter-platform/service/model/ioc"
+	"newsletter-platform/service/util"
 
 	"github.com/google/uuid"
 )
@@ -28,11 +29,17 @@ func NewPostService(postRepo ioc.IPostRepository, emailSrvc ioc.IEmailService, s
 
 // Method for creating a new post in the system.
 func (srvc PostService) CreateNewPost(ctx context.Context, data model.PostCreateModel) (postId uuid.UUID, err error) {
-	tx, err := database.BeginTransaction(ctx)
+	authorId, err := util.GetUserIdFromContext(ctx)
 	if err != nil {
 		return uuid.Nil, err
 	}
+
 	subs, err := srvc.SubscriptionRepository.GetNewsletterSubscriptions(data.NewsletterId)
+	if err != nil {
+		return uuid.Nil, err
+	}
+
+	tx, err := database.BeginTransaction(ctx)
 	if err != nil {
 		return uuid.Nil, err
 	}
@@ -51,7 +58,7 @@ func (srvc PostService) CreateNewPost(ctx context.Context, data model.PostCreate
 	postId, err = srvc.PostRepository.AddPost(db_model.NewPost(
 		data.Title,
 		data.Title,
-		data.AuthorId,
+		authorId,
 		data.NewsletterId,
 	))
 	if err != nil {
@@ -77,7 +84,7 @@ func (srvc PostService) DeletePost(ctx context.Context, postId uuid.UUID) (err e
 		return err
 	}
 	defer func() { err = database.EndTransaction(tx, err) }()
-	userId, err := getUserIdFromContext(ctx)
+	userId, err := util.GetUserIdFromContext(ctx)
 	if err != nil {
 		return err
 	}
