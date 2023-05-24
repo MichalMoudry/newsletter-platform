@@ -31,7 +31,12 @@ MICROSERVICE DEVELOPMENT W/ GO, SEMESTRAL WORK - Version 0.1.0
 - Database layer
 - Utility folder
 - Config folder
-- GitHub Actions definition
+- **GitHub Actions definition** - Folder containing definitions (in .yml files) of GitHub Actions pipelines.
+
+# Deployment
+Currently there is no deployed version of this app.
+
+But there is automated docker image build process. Docker image can be found here: [DockerHub - michalmoudry/newsletter-platform](https://hub.docker.com/r/michalmoudry/newsletter-platform).
 
 # Documentation
 Additional information regarding this system is stored in our [wiki](https://github.com/MichalMoudry/newsletter-platform/wiki "Newsletter platform - wiki pages").

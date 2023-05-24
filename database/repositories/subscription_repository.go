@@ -34,3 +34,8 @@ func (SubscriptionRepository) DeleteSubscription(email string, newsletterId uuid
 	}
 	return nil
 }
+
+// Method for obtaining list of newsletter subscribers.
+func (SubscriptionRepository) GetNewsletterSubscriptions(newsletterId uuid.UUID) ([]string, error) {
+	return nil, nil
+}

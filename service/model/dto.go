@@ -8,3 +8,10 @@ type NewsletterUpdateModel struct {
 	Description         string
 	OldConcurrencyStamp uuid.UUID
 }
+
+type PostCreateModel struct {
+	Title        string
+	Content      string
+	AuthorId     uuid.UUID
+	NewsletterId uuid.UUID
+}

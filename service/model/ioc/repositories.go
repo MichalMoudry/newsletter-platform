@@ -68,4 +68,21 @@ type ISubscriptionRepository interface {
 
 	// Method for deleting a specific subscription in the database.
 	DeleteSubscription(email string, newsletterId uuid.UUID) error
+
+	// Method for obtaining list of newsletter subscribers.
+	GetNewsletterSubscriptions(newsletterId uuid.UUID) ([]string, error)
+}
+
+type IPostRepository interface {
+	// Method for adding a new post to the database.
+	AddPost(data *model.Post) (uuid.UUID, error)
+
+	// Method for obtaining data about a specific post in the database.
+	GetPost(postId uuid.UUID) (model.PostData, error)
+
+	// Method for updating specific Post data in the database.
+	UpdatePost(data model.UpdatePostData) error
+
+	// Method for deleting a specific Post in the database.
+	DeletePost(postId, authorId uuid.UUID) error
 }
