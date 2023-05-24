@@ -20,8 +20,9 @@ MICROSERVICE DEVELOPMENT W/ GO, SEMESTRAL WORK - Version 0.1.0
 # Getting started
 - Get .env file from: [VŠE - OneDrive](https://vse-my.sharepoint.com/:u:/g/personal/moum02_vse_cz/ERRL73wvUD5AmbOrxpF0GwABkiaAUCsNFWA8aAD11Larig?e=VQIUwb ".env file stored on OneDrive")
 - **execute**: `source environment.env`
+- **execute**: `make install_dependencies`
 - **execute**: `make run`
-    - or set EMAIL_SENDER_IDENTITY and SENDGRID_API_KEY (values can be found in the .env file) in the docker-compose.yml file  and execute `make compose`
+    - or set EMAIL_SENDER_IDENTITY and SENDGRID_API_KEY (values can be found in the .env file) in the docker-compose.yml file and execute `make compose`
 
 # Project structure
 - **App entrypoint** - Web API's entrypoint.
