@@ -100,3 +100,12 @@ func (srvc NewsletterService) DeleteNewsletter(ctx context.Context, newsletterId
 	}
 	return nil
 }
+
+// Method for obtaining all posts of a specific newsletter in the system.
+func (srvc NewsletterService) GetPosts(_ context.Context, newsletterId uuid.UUID) (data []db_model.PostData, err error) {
+	data, err = srvc.NewsletterRepo.GetPosts(newsletterId)
+	if err != nil {
+		return make([]db_model.PostData, 0), nil
+	}
+	return data, nil
+}

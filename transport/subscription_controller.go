@@ -38,7 +38,7 @@ func (handler *Handler) NewsletterUnsubscribe(w http.ResponseWriter, r *http.Req
 		return
 	}
 
-	newsletterId, err := getUuidFromUrl(r)
+	newsletterId, err := util.GetUuidFromUrl(r)
 	if err != nil {
 		util.WriteErrResponse(w, http.StatusBadRequest, err)
 		return

@@ -52,4 +52,6 @@ var (
 	GetPost string
 	//go:embed scripts/queries/GetNewsletterSubscribers.sql
 	GetNewsletterSubscribers string
+	//go:embed scripts/queries/GetNewsletterPosts.sql
+	GetNewsletterPosts string
 )

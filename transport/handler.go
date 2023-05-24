@@ -40,8 +40,7 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 		r.Route("/newsletters", func(r chi.Router) {
 			r.Post("/", handler.CreateNewsletter)
 			r.Route("/{uuid}", func(r chi.Router) {
-				r.Get("/", handler.GetNewsletter)
-				r.Get("/posts", nil) // Newsletter's posts
+				r.Get("/posts", handler.GetNewsletterPosts)
 				r.Put("/", handler.UpdateNewsletter)
 				r.Delete("/", handler.DeleteNewsletter)
 			})
@@ -67,6 +66,8 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 		r.Post("/", handler.RegisterSubscription)
 		r.Delete("/{uuid}", handler.NewsletterUnsubscribe)
 	})
+
+	handler.Mux.Get("/newsletters/{uuid}", handler.GetNewsletter)
 
 	return handler
 }

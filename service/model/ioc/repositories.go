@@ -49,6 +49,9 @@ type INewsletterRepository interface {
 
 	// Method for deleting a specific newsletter in the database.
 	DeleteNewsletter(newsletterId uuid.UUID, authorId uuid.UUID) error
+
+	// Method for obtaining newsletter's posts from the database.
+	GetPosts(newsletterId uuid.UUID) ([]model.PostData, error)
 }
 
 type ISubscriberRepository interface {

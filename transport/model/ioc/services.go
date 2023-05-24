@@ -49,6 +49,9 @@ type INewsletterService interface {
 
 	// Method for deleting a specific newsletter in the system.
 	DeleteNewsletter(ctx context.Context, newsletterId uuid.UUID) error
+
+	// Method for obtaining all posts of a specific newsletter in the system.
+	GetPosts(ctx context.Context, newsletterId uuid.UUID) ([]model.PostData, error)
 }
 
 // Method for canceling a subscription in the system.

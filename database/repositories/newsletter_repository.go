@@ -77,3 +77,18 @@ func (NewsletterRepository) DeleteNewsletter(newsletterId, authorId uuid.UUID) e
 	}
 	return nil
 }
+
+// Method for obtaining newsletter's posts from the database.
+func (NewsletterRepository) GetPosts(newsletterId uuid.UUID) ([]model.PostData, error) {
+	ctx, err := database.GetDbContext()
+	if err != nil {
+		return make([]model.PostData, 0), err
+	}
+
+	var data []model.PostData
+	if err = ctx.Select(&data, query.GetNewsletterPosts, newsletterId); err != nil {
+		return make([]model.PostData, 0), err
+	}
+
+	return data, nil
+}
