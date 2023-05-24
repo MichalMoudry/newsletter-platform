@@ -66,13 +66,13 @@ func (PostRepository) UpdatePost(data model.UpdatePostData) error {
 }
 
 // Method for deleting a specific Post in the database.
-func (PostRepository) DeletePost(PostId, authorId uuid.UUID) error {
+func (PostRepository) DeletePost(postId, authorId uuid.UUID) error {
 	ctx, err := database.GetDbContext()
 	if err != nil {
 		return err
 	}
 
-	if _, err = ctx.Exec(query.DeletePost, PostId, authorId); err != nil {
+	if _, err = ctx.Exec(query.DeletePost, postId, authorId); err != nil {
 		return err
 	}
 	return nil

@@ -6,14 +6,8 @@ import (
 	"newsletter-platform/transport/model/contracts"
 	"newsletter-platform/transport/util"
 
-	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 )
-
-// Function for parsing a UUID from request's URL.
-func getUuidFromUrl(r *http.Request) (uuid.UUID, error) {
-	return uuid.Parse(chi.URLParam(r, "uuid"))
-}
 
 // Method for handling requests for creating a new newsletter.
 func (handler *Handler) CreateNewsletter(writer http.ResponseWriter, request *http.Request) {
@@ -42,7 +36,7 @@ func (handler *Handler) CreateNewsletter(writer http.ResponseWriter, request *ht
 
 // Method for handling requests for obtaining public newsletter data.
 func (handler *Handler) GetNewsletter(writer http.ResponseWriter, request *http.Request) {
-	newsletterId, err := getUuidFromUrl(request)
+	newsletterId, err := util.GetUuidFromUrl(request)
 	if err != nil {
 		util.WriteErrResponse(writer, http.StatusBadRequest, err)
 		return
@@ -59,7 +53,7 @@ func (handler *Handler) GetNewsletter(writer http.ResponseWriter, request *http.
 
 // Method for handling requests for updating a specific newsletter.
 func (handler *Handler) UpdateNewsletter(writer http.ResponseWriter, request *http.Request) {
-	newsletterId, err := getUuidFromUrl(request)
+	newsletterId, err := util.GetUuidFromUrl(request)
 	if err != nil {
 		util.WriteErrResponse(writer, http.StatusBadRequest, err)
 		return
@@ -92,7 +86,7 @@ func (handler *Handler) UpdateNewsletter(writer http.ResponseWriter, request *ht
 
 // Method for handling requests for deleting a specific newsletter.
 func (handler *Handler) DeleteNewsletter(writer http.ResponseWriter, request *http.Request) {
-	newsletterId, err := getUuidFromUrl(request)
+	newsletterId, err := util.GetUuidFromUrl(request)
 	if err != nil {
 		util.WriteErrResponse(writer, http.StatusBadRequest, err)
 		return
@@ -105,4 +99,21 @@ func (handler *Handler) DeleteNewsletter(writer http.ResponseWriter, request *ht
 	}
 
 	util.WriteResponse(writer, http.StatusOK, nil)
+}
+
+// Method for handling requests for obtaining all posts of a newsletter
+func (handler *Handler) GetNewsletterPosts(w http.ResponseWriter, r *http.Request) {
+	newsletterId, err := util.GetUuidFromUrl(r)
+	if err != nil {
+		util.WriteErrResponse(w, http.StatusBadRequest, err)
+		return
+	}
+
+	data, err := handler.Services.NewsletterService.GetPosts(r.Context(), newsletterId)
+	if err != nil {
+		util.WriteErrResponse(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	util.WriteResponse(w, http.StatusOK, data)
 }

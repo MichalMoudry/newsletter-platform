@@ -15,8 +15,8 @@ INSERT INTO Post (
      :Post_Publishing_Date,
      :Post_Inserted_Datetime,
      :Post_Updated_Datetime,
-     :Nltr_ID,
      :Post_Author,
+     :Nltr_ID,
      :concurrency_stamp)
 RETURNING
     Post_ID

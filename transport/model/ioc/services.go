@@ -49,6 +49,9 @@ type INewsletterService interface {
 
 	// Method for deleting a specific newsletter in the system.
 	DeleteNewsletter(ctx context.Context, newsletterId uuid.UUID) error
+
+	// Method for obtaining all posts of a specific newsletter in the system.
+	GetPosts(ctx context.Context, newsletterId uuid.UUID) ([]model.PostData, error)
 }
 
 // Method for canceling a subscription in the system.
@@ -58,4 +61,15 @@ type ISubscriptionService interface {
 
 	// Method for cancelling a subscription in the system.
 	CancelSubscription(ctx context.Context, email string, newsletterId uuid.UUID) error
+}
+
+type IPostService interface {
+	// Method for creating a new post in the system.
+	CreateNewPost(ctx context.Context, data service_model.PostCreateModel) (uuid.UUID, error)
+
+	// Method for obtaining post information from the system.
+	GetPost(ctx context.Context, postId uuid.UUID) (model.PostData, error)
+
+	// Function for deleting a specific post in the system.
+	DeletePost(ctx context.Context, postId uuid.UUID) error
 }

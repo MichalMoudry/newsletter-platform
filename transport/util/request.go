@@ -4,6 +4,9 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
+	"github.com/google/uuid"
 )
 
 func UnmarshallRequest(request *http.Request, b any) error {
@@ -21,4 +24,9 @@ func UnmarshallRequest(request *http.Request, b any) error {
 	}
 
 	return nil
+}
+
+// Function for parsing a UUID from request's URL.
+func GetUuidFromUrl(r *http.Request) (uuid.UUID, error) {
+	return uuid.Parse(chi.URLParam(r, "uuid"))
 }

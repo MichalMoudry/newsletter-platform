@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  title: Newsletter platform
+  description: A platform for creating newsletters and publishing post to them
+  version: 1.0.0
+servers:
+  - url: http://localhost:8443
+    description: Localhost server
+
+paths:
+  "/health":
+    get:
+      description: Hearthbeat
+      operationId: hearth
+      summary: Check the hearthbeat of the service
+      responses: 
+        "204":
+          description: Service is up and running
+        "400":
+          description: Invalid request
+  "/users/{email}":
+    get:
+      description: Gets information about the specific user
+      operationId: GetUserData
+      summary: Gets information about the specific user
+      responses:
+        "200":
+          description: Information was successfully retrieved
+          content:
+            application/json; charset=utf-8:
+        "400":
+          description: Incoming request did not meet the requirements
+          content:
+            application/json; charset=utf-8:
+        "500":
+          description: An internal error occured during information retrieval
+          content:
+            application/json; charset=utf-8:
+    delete:
+      description: Deletes a specific user (and all associated data) in the system
+      operationId: DeleteUser
+      summary: Deletes a specific user (and all associated data) in the system
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+        "400":
+          content:
+            application/json; charset=utf-8:
+        "500":
+          content:
+            application/json; charset=utf-8:
+    put:
+      description: Updates user's mutable information (e.g. user name).
+      operationId: UpdateUserInfo
+      summary: Updates user's mutable information (e.g. user name).
+      responses:
+        "200":
+          content:
+            application/json; charset=utf-8:
+        "400":
+          content:
+            application/json; charset=utf-8:
+        "500":
+          content:
+            application/json; charset=utf-8:

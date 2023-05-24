@@ -14,10 +14,14 @@ type ServiceCollection struct {
 	PassResetService    ioc.IPassResetService
 	NewsletterService   ioc.INewsletterService
 	SubscriptionService ioc.ISubscriptionService
+	PostService         ioc.IPostService
 }
 
 func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
 	userRepo := &repositories.UserRepository{}
+	subscriptionRepo := &repositories.SubscriptionRepository{}
+	newsletterRepo := &repositories.NewsletterRepository{}
+	emailSrvc := service.NewEmailService()
 
 	return ServiceCollection{
 		UserService: service.NewUserService(
@@ -27,14 +31,19 @@ func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
 		PassResetService: service.NewPassResetService(
 			repositories.PassResetRepository{},
 			userRepo,
-			service.NewEmailService(),
+			emailSrvc,
 		),
-		NewsletterService: service.NewNewsletterService(
-			repositories.NewsletterRepository{},
-		),
+		NewsletterService: service.NewNewsletterService(newsletterRepo),
 		SubscriptionService: service.NewSubscriptionService(
-			repositories.SubscriptionRepository{},
+			subscriptionRepo,
 			repositories.SubscriberRepository{},
+			newsletterRepo,
+			emailSrvc,
+		),
+		PostService: service.NewPostService(
+			repositories.PostRepository{},
+			emailSrvc,
+			subscriptionRepo,
 		),
 	}
 }

@@ -2,7 +2,7 @@ BEGIN;
 
 CREATE TABLE Post (
     Post_ID UUID PRIMARY KEY,
-    Post_Title VARCHAR(255) NOT NULL UNIQUE,
+    Post_Title VARCHAR(255) NOT NULL,
     Post_Content VARCHAR(17500) NOT NULL, --~3.5k words
     Post_Publishing_Date DATE NOT NULL,
     Post_Inserted_Datetime TIMESTAMP NOT NULL,

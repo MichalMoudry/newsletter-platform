@@ -1,0 +1,706 @@
+{
+  "info": {
+    "name": "Newsletter platform",
+    "description": null,
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": null,
+      "request": {
+        "auth": {
+          "type": null,
+          "apikey": null,
+          "awsv4": null,
+          "basic": null,
+          "bearer": null,
+          "digest": null,
+          "hawk": null,
+          "ntlm": null,
+          "oauth1": null,
+          "oauth2": null
+        },
+        "method": "GET",
+        "header": null,
+        "body": {
+          "mode": null,
+          "raw": null,
+          "options": null,
+          "formdata": null,
+          "urlencoded": null,
+          "file": null
+        },
+        "url": {
+          "raw": "http://localhost:8443/health",
+          "protocol": null,
+          "host": null,
+          "path": null,
+          "query": [],
+          "variable": null
+        }
+      }
+    },
+    {
+      "name": "Register",
+      "item": null,
+      "request": {
+        "auth": {
+          "type": null,
+          "apikey": null,
+          "awsv4": null,
+          "basic": null,
+          "bearer": null,
+          "digest": null,
+          "hawk": null,
+          "ntlm": null,
+          "oauth1": null,
+          "oauth2": null
+        },
+        "method": "POST",
+        "header": null,
+        "body": {
+          "mode": null,
+          "raw": "{\r\n\t\"email\": \"\",\r\n\t\"user_name\": \"\",\r\n\t\"password\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "formdata": null,
+          "urlencoded": null,
+          "file": null
+        },
+        "url": {
+          "raw": "http://localhost:8443/register",
+          "protocol": null,
+          "host": null,
+          "path": null,
+          "query": [],
+          "variable": null
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "item": null,
+      "request": {
+        "auth": {
+          "type": null,
+          "apikey": null,
+          "awsv4": null,
+          "basic": null,
+          "bearer": null,
+          "digest": null,
+          "hawk": null,
+          "ntlm": null,
+          "oauth1": null,
+          "oauth2": null
+        },
+        "method": "POST",
+        "header": null,
+        "body": {
+          "mode": null,
+          "raw": "{\r\n  \"email\": \"\",\r\n  \"password\": \"\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          },
+          "formdata": null,
+          "urlencoded": null,
+          "file": null
+        },
+        "url": {
+          "raw": "http://localhost:8443/login",
+          "protocol": null,
+          "host": null,
+          "path": null,
+          "query": [],
+          "variable": null
+        }
+      }
+    },
+    {
+      "name": "Editor",
+      "item": [
+        {
+          "name": "Get editor data",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": null,
+              "options": null,
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/users/{email}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Delete editor",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "DELETE",
+            "header": null,
+            "body": {
+              "mode": null,
+              "raw": "{\r\n\t\"concurrency_stamp\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/editors/{email}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Update editor",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": "{\r\n\t\"user_name\": \",\r\n\t\"concurrency_stamp\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/users/{email}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        }
+      ],
+      "request": null
+    },
+    {
+      "name": "Password reset",
+      "item": [
+        {
+          "name": "Password reset request",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "POST",
+            "header": null,
+            "body": {
+              "mode": null,
+              "raw": "{\r\n  \"email\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/passwordresetrequests",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Password reset 1",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "PATCH",
+            "header": null,
+            "body": {
+              "mode": null,
+              "raw": "{\r\n  \"email\": \"\",\r\n  \"new_password\": \"\",\r\n\t\"token_id\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/.well-known/change-password",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        }
+      ],
+      "request": null
+    },
+    {
+      "name": "Newsletter",
+      "item": [
+        {
+          "name": "Create newsletter",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": "{\r\n\t\"name\": \"\",\r\n\t\"description\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/newsletters",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Get newsletter",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "GET",
+            "header": null,
+            "body": {
+              "mode": null,
+              "raw": null,
+              "options": null,
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/newsletters/{uuid}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Get posts",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": null,
+              "options": null,
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/newsletters/{newsletter_id}/posts",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        }
+      ],
+      "request": null
+    },
+    {
+      "name": "Subscriptions",
+      "item": [
+        {
+          "name": "Create subscription",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "POST",
+            "header": null,
+            "body": {
+              "mode": null,
+              "raw": "{\r\n\t\"email\": \"\",\r\n\t\"newsletter_id\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/subscriptions",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Delete subscription",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "DELETE",
+            "header": null,
+            "body": {
+              "mode": null,
+              "raw": "{\r\n\t\"email\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/subscriptions/{uuid}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        }
+      ],
+      "request": null
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Create post",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": "{\r\n\t\"title\": \"\",\r\n\t\"content\": \"\",\r\n\t\"newsletter\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/posts",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Get post",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": null,
+              "options": null,
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/posts/{uuid}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        },
+        {
+          "name": "Delete post",
+          "item": null,
+          "request": {
+            "auth": {
+              "type": null,
+              "apikey": null,
+              "awsv4": null,
+              "basic": null,
+              "bearer": null,
+              "digest": null,
+              "hawk": null,
+              "ntlm": null,
+              "oauth1": null,
+              "oauth2": null
+            },
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "BEARER ",
+                "type": "Header",
+                "disabled": false
+              }
+            ],
+            "body": {
+              "mode": null,
+              "raw": null,
+              "options": null,
+              "formdata": null,
+              "urlencoded": null,
+              "file": null
+            },
+            "url": {
+              "raw": "http://localhost:8443/posts/{uuid}",
+              "protocol": null,
+              "host": null,
+              "path": null,
+              "query": [],
+              "variable": null
+            }
+          }
+        }
+      ],
+      "request": null
+    }
+  ],
+  "variable": null,
+  "auth": null
+}
