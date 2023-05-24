@@ -20,6 +20,7 @@ type ServiceCollection struct {
 func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
 	userRepo := &repositories.UserRepository{}
 	subscriptionRepo := &repositories.SubscriptionRepository{}
+	newsletterRepo := &repositories.NewsletterRepository{}
 	emailSrvc := service.NewEmailService()
 
 	return ServiceCollection{
@@ -32,12 +33,12 @@ func NewServiceCollection(tokenAuth *jwtauth.JWTAuth) ServiceCollection {
 			userRepo,
 			emailSrvc,
 		),
-		NewsletterService: service.NewNewsletterService(
-			repositories.NewsletterRepository{},
-		),
+		NewsletterService: service.NewNewsletterService(newsletterRepo),
 		SubscriptionService: service.NewSubscriptionService(
 			subscriptionRepo,
 			repositories.SubscriberRepository{},
+			newsletterRepo,
+			emailSrvc,
 		),
 		PostService: service.NewPostService(
 			repositories.PostRepository{},
