@@ -59,10 +59,9 @@ type SubscriberInformation struct {
 }
 
 type PostData struct {
-	Post_ID      uuid.UUID `db:"Post_ID"`
-	Post_Title   string    `db:"Post_Title"`
-	Post_Content string    `db:"Post_Content"`
-	Nltr_ID      uuid.UUID `db:"Nltr_ID"`
+	Title   string `db:"post_title"`
+	Content string `db:"post_content"`
+	Author  string `db:"user_name"`
 }
 
 type UpdatePostData struct {
@@ -77,7 +76,8 @@ type UpdatePostData struct {
 	concurrency_stamp    uuid.UUID `db:"concurrency_stamp"`
 }
 
-type NewsletterSubscriptions struct {
-	NewsletterName string   `db:"Nltr_Name"`
-	Subscribers    []string `db:"email"`
+type NewsletterInformation struct {
+	NewsletterName   string `db:"nltr_name"`
+	NewsletterAuthor string `db:"nltr_author"`
+	Subscriber       string `db:"subscriber_id"`
 }

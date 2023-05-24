@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"log"
 	"newsletter-platform/database"
 	"newsletter-platform/database/model"
 	"newsletter-platform/service/model/ioc"
@@ -45,7 +44,6 @@ func (srvc SubscriptionService) CreateSubscription(ctx context.Context, email st
 		}
 	}
 
-	log.Printf("-- %v", model.NewNewsletterSubscription(newsletterId, email))
 	err = srvc.SubscriptionRepo.AddSubscription(model.NewNewsletterSubscription(newsletterId, email))
 	if err != nil {
 		return err

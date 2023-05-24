@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"newsletter-platform/database"
 	db_model "newsletter-platform/database/model"
+	"newsletter-platform/service/errors"
 	"newsletter-platform/service/model"
 	"newsletter-platform/service/model/email"
 	"newsletter-platform/service/model/ioc"
@@ -43,12 +44,21 @@ func (srvc PostService) CreateNewPost(ctx context.Context, data model.PostCreate
 	if err != nil {
 		return uuid.Nil, err
 	}
+
 	defer func() {
 		err = database.EndTransaction(tx, err)
-		if err == nil {
+		if err == nil && len(subs) > 0 {
+			if subs[0].NewsletterAuthor != authorId.String() {
+				err = errors.ErrInvalidEmail
+				return
+			}
+			var emails []string
+			for _, subscription := range subs {
+				emails = append(emails, subscription.Subscriber)
+			}
 			err = srvc.EmailService.SendBatch(
-				subs.Subscribers,
-				fmt.Sprintf("%s - %s", subs.NewsletterName, data.Title),
+				emails,
+				fmt.Sprintf("%s - %s", subs[0].NewsletterName, data.Title),
 				data.Content,
 				fmt.Sprintf(email.PostEmailContent, data.Content),
 			)
@@ -57,7 +67,7 @@ func (srvc PostService) CreateNewPost(ctx context.Context, data model.PostCreate
 
 	postId, err = srvc.PostRepository.AddPost(db_model.NewPost(
 		data.Title,
-		data.Title,
+		data.Content,
 		authorId,
 		data.NewsletterId,
 	))

@@ -49,3 +49,9 @@ type RegisterSubscriptionRequestData struct {
 type CancelSubscriptionRequestData struct {
 	Email string `json:"email" validate:"required"`
 }
+
+type CreatePostRequestData struct {
+	Title        string `json:"title" validate:"required"`
+	Content      string `json:"content" validate:"required"`
+	NewsletterId string `json:"newsletter" validate:"required"`
+}

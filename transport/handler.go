@@ -48,8 +48,10 @@ func Initialize(port int, tokenAuth *jwtauth.JWTAuth, services model.ServiceColl
 		})
 
 		r.Route("/posts", func(r chi.Router) {
-			r.Post("/", nil)                          // Create post
-			r.Route("/{uuid}", func(r chi.Router) {}) // Operations on the post resource
+			r.Post("/", handler.SendPost)
+			r.Route("/{uuid}", func(r chi.Router) {
+				r.Get("/", handler.GetPost)
+			}) // Operations on the post resource
 		})
 	})
 
