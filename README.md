@@ -42,6 +42,8 @@ But there is automated docker image build process. Docker image can be found her
 # Documentation
 Additional information regarding this system is stored in our [wiki](https://github.com/MichalMoudry/newsletter-platform/wiki "Newsletter platform - wiki pages").
 
+Postman collection for the API can be found here: [Postman collection](./docs/newsletter_platform.json "JSON file with the Postman collection")
+
 # Used libraries
 ...
 
