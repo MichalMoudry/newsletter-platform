@@ -39,7 +39,7 @@ func (handler *Handler) SendPost(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-// Method for handling request to obtain information about a post.
+// Method for handling requests to obtain information about a post.
 func (handler *Handler) GetPost(w http.ResponseWriter, r *http.Request) {
 	postId, err := util.GetUuidFromUrl(r)
 	if err != nil {
@@ -54,4 +54,20 @@ func (handler *Handler) GetPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	util.WriteResponse(w, http.StatusOK, data)
+}
+
+// Method for handling requests for deleting posts.
+func (handler *Handler) DeletePost(w http.ResponseWriter, r *http.Request) {
+	postId, err := util.GetUuidFromUrl(r)
+	if err != nil {
+		util.WriteErrResponse(w, http.StatusBadRequest, err)
+		return
+	}
+
+	err = handler.Services.PostService.DeletePost(r.Context(), postId)
+	if err != nil {
+		util.WriteErrResponse(w, http.StatusInternalServerError, err)
+		return
+	}
+	util.WriteResponse(w, http.StatusOK, nil)
 }
