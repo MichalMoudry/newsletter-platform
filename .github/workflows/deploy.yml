@@ -48,5 +48,8 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          imageToDeploy: https://hub.docker.com/michalmoudry/newsletter-platform:latest
+          imageToDeploy: docker.io/michalmoudry/newsletter-platform:latest
           resourceGroup: newsletter-platform
+          #registryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
+          #registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
+          #environmentVariables:
