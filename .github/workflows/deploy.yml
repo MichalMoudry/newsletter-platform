@@ -38,7 +38,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment: Azure
-    needs: [push_to_registry]
+    #needs: [push_to_registry]
     steps:
       - name: Log in to Azure
         uses: azure/login@v1
