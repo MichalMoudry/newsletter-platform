@@ -6,6 +6,7 @@ on:
 
 jobs:
   push_to_registry:
+    if: false
     name: Push Docker image
     runs-on: ubuntu-latest
     environment: Azure
@@ -34,7 +35,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
   
   deploy:
-    if: false
     name: Deploy
     runs-on: ubuntu-latest
     environment: Azure
