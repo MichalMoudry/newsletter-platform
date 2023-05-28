@@ -37,7 +37,7 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: Azure
+    #environment: Azure
     #needs: [push_to_registry]
     steps:
       - name: Log in to Azure
@@ -50,6 +50,7 @@ jobs:
         with:
           imageToDeploy: docker.io/michalmoudry/newsletter-platform:latest
           resourceGroup: newsletter-platform
-          #registryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
-          #registryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
-          #environmentVariables:
+          containerAppEnvironment: newsletter-platform-env
+          containerAppName: newsletter-platform-app
+          environmentVariables:
+            APP_ENVIRONMENT=prod secretref:EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }}
