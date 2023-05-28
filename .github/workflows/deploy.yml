@@ -53,4 +53,4 @@ jobs:
           containerAppEnvironment: newsletter-platform-env
           containerAppName: newsletter-platform-app
           environmentVariables:
-            APP_ENVIRONMENT=prod secretref:EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }}
+            APP_ENVIRONMENT=prod EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }}
