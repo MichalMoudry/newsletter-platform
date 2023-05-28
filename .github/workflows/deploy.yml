@@ -52,5 +52,6 @@ jobs:
           resourceGroup: newsletter-platform
           containerAppEnvironment: newsletter-platform-env
           containerAppName: newsletter-platform-app
+          targetPort: 8443
           environmentVariables:
-            APP_ENVIRONMENT=prod EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }}
+            APP_ENVIRONMENT=dev EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }} SECURITY_STRING=${{ secrets.SECURITY_STRING }}
