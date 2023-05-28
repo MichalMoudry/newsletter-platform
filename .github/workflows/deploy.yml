@@ -6,7 +6,6 @@ on:
 
 jobs:
   push_to_registry:
-    if: false
     name: Push Docker image
     runs-on: ubuntu-latest
     environment: Azure
@@ -37,8 +36,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    #environment: Azure
-    #needs: [push_to_registry]
+    environment: Azure
+    needs: [push_to_registry]
     steps:
       - name: Log in to Azure
         uses: azure/login@v1
@@ -54,4 +53,4 @@ jobs:
           containerAppName: newsletter-platform-app
           targetPort: 8443
           environmentVariables:
-            APP_ENVIRONMENT=dev EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }} SECURITY_STRING=${{ secrets.SECURITY_STRING }}
+            APP_ENVIRONMENT=prod CONNECTION_STRING=${{ secrets.CONNECTION_STRING }} EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }} SECURITY_STRING=${{ secrets.SECURITY_STRING }} SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
