@@ -34,7 +34,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
   
   deploy:
-    if: false
     name: Deploy
     runs-on: ubuntu-latest
     environment: Azure
@@ -44,3 +43,14 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          imageToDeploy: docker.io/michalmoudry/newsletter-platform:latest
+          resourceGroup: newsletter-platform
+          containerAppEnvironment: newsletter-platform-env
+          containerAppName: newsletter-platform-app
+          targetPort: 8443
+          environmentVariables:
+            APP_ENVIRONMENT=prod CONNECTION_STRING=${{ secrets.CONNECTION_STRING }} EMAIL_SENDER_IDENTITY=${{ secrets.EMAIL_SENDER_IDENTITY }} SECURITY_STRING=${{ secrets.SECURITY_STRING }} SENDGRID_API_KEY=${{ secrets.SENDGRID_API_KEY }}
